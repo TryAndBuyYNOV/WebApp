@@ -18,7 +18,6 @@ export default function IndexPage() {
   return (
     <ThemeProvider theme={theme}>
         <Layout>
-
         </Layout>
     </ThemeProvider>
   );
