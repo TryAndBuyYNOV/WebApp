@@ -50,7 +50,12 @@ const index = () => {
 
          localStorage.setItem("user" , userData)
 
-           console.log(JSON.parse(localStorage.getItem("user")));
+         router.push("/account")
+          
+
+           
+        
+        
         }     
          
         if(called===true && !data){
