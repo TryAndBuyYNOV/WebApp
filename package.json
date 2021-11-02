@@ -8,9 +8,11 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.16",
     "dotenv": "^8.2.0",
     "framer-motion": "^2.7.5",
     "globby": "^11.0.0",
+    "graphql": "^15.7.2",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.5.3",
     "next-compose-plugins": "^2.2.0",

@@ -1,0 +1,33 @@
+.SearchAdmin{
+
+    padding: 1rem;
+    border: none;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    margin-top: 1rem;
+    font-family: cursive;
+    font-size: 1rem;
+    color: purple;
+    outline: 2px solid purple;
+    border-radius: 3px;
+    display: block;
+}
+
+
+
+.SearchAdmin::placeholder{
+    color: purple;
+}
+
+.Label{
+    margin-left: 4rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
+    display: inline-block;
+     font-family: cursive;
+    font-size: 1rem;
+    color: purple;
+
+}
