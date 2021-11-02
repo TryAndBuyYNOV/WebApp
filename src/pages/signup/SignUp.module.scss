@@ -1,0 +1,23 @@
+@import '../../Scss/forms';
+
+$redColor : #DC143C;
+$whiteColor : aliceblue;
+.signupForms{
+    @include forms()
+}
+
+.container{
+    font-family: cursive;
+    text-align: center;
+}
+
+.SubmitButton{
+    background: $redColor ;
+    color: $whiteColor;
+}
+
+.ErrorMessage{
+    padding: 1rem;
+    background: $redColor;
+    color : $whiteColor
+}
