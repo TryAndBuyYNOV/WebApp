@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from '../../../Components/Admin/SearchBar.module.css'
-import NavBarAdmin from '../../../Components/Admin/NavBarAdmin'
+import styles from '../../../../components/admin/SearchBar.module.css'
 import {gql , useQuery , useMutation} from '@apollo/client' 
 import { useRouter } from 'next/router';
+import Navbar from 'components/Account/Navbar';
 const Product = () => {
 
     // React Hooks
@@ -16,6 +16,7 @@ const Product = () => {
     })
     const router = useRouter()
     const ProductID = router.query.id
+    const ROLE  = JSON.parse(localStorage.getItem("user")).role
     const isUpdated = useRef(false)
     // event functions 
     const onSubmitProduct = (event)=>{
@@ -53,16 +54,16 @@ const Product = () => {
     const updateProductQuery = gql`
         mutation UpdateProduct ($id : ID!,$title:String!,
                                 $priceHT : Float! ,$description:String! ,
-                                $category:String! ,
-                                $status:String!
-                                ){
+                                $category:String!,
+                                 $status:String!
+                                 ){
 
     updateProduct(id:$id ,
       title :$title ,
       priceHT:$priceHT , 
       description :$description
       category : $category ,
-      status:$status
+      status :$status
       ){
     id
   }
@@ -93,8 +94,8 @@ useEffect(()=>{
             title : dataProduct.title,
             price :  dataProduct.priceHT,
             description : dataProduct.description ,
-            category : dataProduct.category ,
-            status :dataProduct.productStatus
+            category : dataProduct.category,
+            status : dataProduct.productStatus
         })
     }
 })
@@ -104,7 +105,7 @@ useEffect(()=>{
     const deleteProduct = ()=>{
         deleteProductFunction({variables:{id:ProductID}}).then(result=>{
             alert("produit suprrimé :)")
-            router.push("/admin/products")
+            router.push("/account/products/manage")
         }).catch(error=>{
             console.log(error);
         })
@@ -120,8 +121,7 @@ useEffect(()=>{
            priceHT : parseFloat(Forms.price),
            description : Forms.description,
            category : Forms.category,
-           status : Forms.status
-        
+            status : Forms.status
         }}).then(result=>{
                alert("produit modifié :)")
             }).catch(error=>{
@@ -130,18 +130,18 @@ useEffect(()=>{
         console.log(result);
     }
 
-    console.log(Forms);
-      return (
-     <div style={{
-                display :"flex",
-            
-                alignItems:"flex-start",
-                width :"100vw",
-                height:"100vh",
-                margin :'3rem 2rem'
-            }}>
 
-            <NavBarAdmin />
+    return (
+     <div tyle={{
+         textAlign:'center',
+         display:"flex",
+         flexDirection:'column',
+         justifyContent:"center",
+         alignItems:"center"
+     }}>
+
+            <Navbar role={ROLE} />
+           
 
                  <form onSubmit={onSubmitProduct}>
                 <label htmlFor="title" className={styles.Label}>Titre:</label>
@@ -178,7 +178,11 @@ useEffect(()=>{
                      </select> 
 
 
-                           <label htmlFor="status" className={styles.Label}>Status:</label>
+
+
+
+
+                    <label htmlFor="status" className={styles.Label}>Status:</label>
                      <select  onChange={changeHandler} style={{
                     marginLeft:"4rem"
                 }} className={styles.SearchAdmin} name="status" id="status">
@@ -190,7 +194,6 @@ useEffect(()=>{
 
                         <option selected={Forms.status=="Selled" ? true : false}  value="Selled"> vendu</option> 
                        </select>
-
 
 
 

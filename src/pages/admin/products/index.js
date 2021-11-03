@@ -9,7 +9,7 @@ const products = () => {
     const isUpdated = useRef(false)
     const ProductQuery = gql `
         query {
-             products{id  title priceHT description imgUrl}
+             products{id  title priceHT description imgUrl category productStatus}
         }
     `
         
@@ -17,7 +17,7 @@ const products = () => {
      if(loading) UIResult = <p> loading</p>
      if(error) UIResult = <p> something want wrong</p>
      if(data && !isUpdated.current){
-        UIResult= <ProductList data={data["products"]} />  
+        UIResult= <ProductList filter="all" role="admin" data={data["products"]} />  
      }
 
      const onSearch = (event)=>{
@@ -36,7 +36,7 @@ const products = () => {
                 }
             });
                 
-            setUIResult(<ProductList data={newData} />)
+            setUIResult(<ProductList name="name" data={newData} />)
             
         }
      }

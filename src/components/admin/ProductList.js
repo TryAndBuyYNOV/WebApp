@@ -5,9 +5,14 @@ import ProductItem from './ProductItem';
 
 
 const ProductList = (props) => {
-
     const data = props.data.map(product=>{
-        return <ProductItem key={product.id} id={product.id}  title={product.title} priceHT = {product.priceHT} />
+        if(props.filter =="all"){
+           
+                  return <ProductItem role={props.role} key={product.id} id={product.id}  title={product.title} priceHT = {product.priceHT} status={product.productStatus} category = {product.category} />
+        } else if(product.productStatus ==props.filter){
+                return <ProductItem role={props.role} key={product.id} id={product.id}  title={product.title} priceHT = {product.priceHT} status={product.productStatus} category = {product.category} />
+        }
+      
     })
   
 

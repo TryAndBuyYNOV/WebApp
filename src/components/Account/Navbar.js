@@ -10,8 +10,8 @@ const Navbar = ({role}) => {
         navbar = <nav>
             <ul>
                 <li> <Link href="/account/profile" > Mon profile </Link> </li>
-                <li> <Link href="" > Gestion Produits </Link> </li>
-                <li> <Link href="" > Mes ventes </Link> </li>
+                <li> <Link href="/account/products/add" > Ajouter produit </Link> </li>
+                 <li> <Link href="/account/products/manage" > Mes ventes </Link> </li>
                 <li> <Link href="" > Mes offres </Link> </li>
             </ul>
         </nav>

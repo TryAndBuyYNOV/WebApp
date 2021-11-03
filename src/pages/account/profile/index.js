@@ -204,11 +204,19 @@ mutation DeleteUser($id:ID!){
 
 console.log(Forms);
     return (
-     <div>
-
+     <div
+      style={{
+         textAlign:'center',
+         display:"flex",
+         flexDirection:'column',
+         justifyContent:"center",
+         alignItems:"center"
+     }}
+     >
+         
          <Navbar role={ROLE} />
 
-            
+            <h1> Mon profile</h1>
             <div style={{
                 marginLeft:"10rem"
             }}>
