@@ -83,10 +83,19 @@ const [createUserFunction , {data , loading , error}] = useMutation(creatUser)
   
 
     const AutoCompletComponent = ({state})=>{
+
+        const [inputValue , setInputValue] = useState(state.address.localisation)
+
+        const onChangeInputHandler= (event)=>{
+            const value = event.target.value
+                setInputValue(value)
+            
+        }
+ 
         return (
             <AutoComplete className={styles.signupForms} 
-            value={state.address.localisation!="" ? state.address.localisation : null}
-           
+            value={inputValue}
+           onChange={onChangeInputHandler}
         apiKey={"AIzaSyAXcZLzg7Ut2hABj8Yo2ekpYuowcwKeBas"}
         onPlaceSelected={(place)=>{
             const lat = place.geometry.location.lat()

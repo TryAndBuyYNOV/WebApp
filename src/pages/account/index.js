@@ -1,4 +1,7 @@
 import React from 'react';
+import Navbar from '../../components/Account/Navbar';
+import Buyer from '../../components/Buyer/Buyer';
+import Seller from '../../components/Seller/Seller';
 
 const index = () => {
 
@@ -8,15 +11,16 @@ const index = () => {
 
     if(role=="Buyer"){
 
-        UserInterface = <p> this is buyer</p>
+        UserInterface = <Buyer />
     }
 
     if (role=="Seller"){
-        UserInterface = <p> this is seller</p>
+        UserInterface = <Seller />
     }
 
     return (
         <div>
+            <Navbar role={role} />
             {UserInterface }
         </div>
     );

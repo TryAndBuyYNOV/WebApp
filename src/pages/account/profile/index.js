@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {useRouter} from 'next/router'
-import NavBarAdmin from '../../../Components/Admin/NavBarAdmin';
 import {gql , useQuery , useMutation} from '@apollo/client'
 import styles from '../../../Components/Admin/SearchBar.module.css'
 import AutoComplete from 'react-google-autocomplete'
-
-const User = () => {
+import Navbar from '../../../components/Account/Navbar'
+const Profile = () => {
 
     // React Hooks
     const router = useRouter()
@@ -22,7 +21,11 @@ const User = () => {
         Role : ""
     }) 
     let isUpdated = useRef(false);
-   
+
+    // user ID constant 
+
+    const ID = JSON.parse(localStorage.getItem("user")).id
+    const   ROLE = JSON.parse(localStorage.getItem("user")).role
     // event functions
     const changeHandler = (event)=>{
       
@@ -97,7 +100,7 @@ mutation DeleteUser($id:ID!){
 
 // API calls
      const { loading, error, data } = useQuery(UserQuery, {
-    variables: { id : router.query.id },
+    variables: { id : ID },
                                                                  });
     const [ModifyPersonM, { dataModify, loadingModify, errorModify }] = useMutation(queryModifayUser);
     const [DeleteUser, { dataDelete, loadingDelete, errorDelete }] = useMutation(queryDeleteUser);
@@ -131,7 +134,7 @@ mutation DeleteUser($id:ID!){
 
       ModifyPersonM({
           variables:{
-              id:router.query.id,
+              id:ID,
               firstName : Forms.firstName,
               lastName : Forms.lastName ,
               phoneNumber : Forms.Phone,
@@ -156,7 +159,7 @@ mutation DeleteUser($id:ID!){
       console.log("delete");
             DeleteUser({
                 variables:{
-                    id : router.query.id
+                    id : ID
                 }
             }).then(result=>{
               alert("utilisateur supprimé")
@@ -201,17 +204,11 @@ mutation DeleteUser($id:ID!){
 
 console.log(Forms);
     return (
-     <div style={{
-                display :"flex",
+     <div>
+
+         <Navbar role={ROLE} />
+
             
-                alignItems:"flex-start",
-                width :"100vw",
-                height:"100vh",
-                margin :'3rem 2rem'
-            }}>
-
-            <NavBarAdmin />
-
             <div style={{
                 marginLeft:"10rem"
             }}>
@@ -280,4 +277,4 @@ console.log(Forms);
     );
 };
 
-export default User;
+export default Profile;
