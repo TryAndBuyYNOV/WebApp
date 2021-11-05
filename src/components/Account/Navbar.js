@@ -20,9 +20,9 @@ const Navbar = ({role}) => {
         if(role=="Buyer"){
         navbar = <nav>
             <ul>
-                <li> <Link href="" > Mon profile </Link> </li>
+                <li> <Link href="/account/profile" > Mon profile </Link> </li>
                 <li> <Link href="" > Mes commandes </Link> </li>
-                <li> <Link href="" > Catalogues </Link> </li>
+                <li> <Link href="/account/catalog" > Catalogues </Link> </li>
              
             </ul>
         </nav>
