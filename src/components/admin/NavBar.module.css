@@ -1,0 +1,20 @@
+.adminContainer{
+
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background: purple;
+    width: 150px;
+    height: 500px;
+    padding: 1rem;
+    margin: 0;
+    font-family: cursive;
+    text-transform: uppercase;
+
+}
+
+.adminContainer a{
+
+    text-decoration: none;
+    color: seashell;
+}

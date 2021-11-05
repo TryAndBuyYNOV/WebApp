@@ -22,8 +22,7 @@ const Navbar = ({role}) => {
             <ul>
                 <li> <Link href="" > Mon profile </Link> </li>
                 <li> <Link href="/account/carts" > Mes commandes </Link> </li>
-                <li> <Link href="" > Catalogues </Link> </li>
-             
+                <li> <Link href="/account/catalog" > Catalogues </Link> </li>
             </ul>
         </nav>
     }
