@@ -24,7 +24,7 @@ const {loading , error , data } = useQuery(getProductsToSell)
 if(loading) RESULT = <p> loading ...</p>
 if(error) RESULT = <p> somehing want wrong</p>
 if(data){
-    RESULT = <ProductList filterCategory={filterCategory}  role="Buyer" data={data["productCatalog"]} />
+    RESULT = <ProductList role ="catalog" filterCategory={filterCategory}  data={data["productCatalog"]} />
 }
     return (
         <div>

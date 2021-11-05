@@ -2,11 +2,14 @@ import React from 'react';
 import styles from './ProductItem.module.css'
 import Link from 'next/link'
 const ProductItem = (props) => {
-    
+    console.log(props.role);
    let link =""
 
    if(props.role=="admin"){
        link =`/admin/products/${encodeURIComponent(props.id)}` 
+   }
+    if(props.role=="catalog"){
+     link = `/account/catalog/${encodeURIComponent(props.id)}`
    }
 
    else {
