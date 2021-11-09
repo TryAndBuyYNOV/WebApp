@@ -1,11 +1,81 @@
 import React from 'react';
 import Navbar from 'components/Account/Navbar';
 import styles from "./catalog.module.scss"
+import Map from '../../../components/GoogleMap/map'
+import {useRouter} from 'next/router'
+import {gql , useQuery , useMutation} from '@apollo/client'
+import {MdFavorite} from 'react-icons/all'
 const Product = () => {
 
+    let Product = {
+        title : "",
+        description : "",
+        price : "",
+        userId : null
+    }
+    const router = useRouter()
     const IDUSER = JSON.parse(localStorage.getItem("user")).id
     const ROLE  =  JSON.parse(localStorage.getItem("user")).role
-    console.log(ROLE);
+    const idProduct = router.query.id
+    
+    // gql query 
+    const QueryGetProduct = gql`
+    query GetProduct($id:ID!){
+  
+            product(id : $id){
+            id
+            userId
+            title
+            priceHT
+            description
+            imgUrl
+            category
+            
+                      }}`
+
+    // gql mutation 
+    
+    const MutationAddToCart = gql `
+    
+    mutation AddToCart ($userId : ID ! , $productId : ID !){
+  addToCart(userId : $userId,
+    productId : $productId)
+    {id}
+} 
+`
+// call gql api 
+const {loading , error , data} = useQuery(QueryGetProduct , {variables : {id : idProduct}})
+const [AddToCartFunction , {dataCart , loadingCart , errorCart }] = useMutation(MutationAddToCart)
+
+const AddToCartHandler = ()=>{
+    AddToCartFunction({variables : {
+        userId : IDUSER ,
+        productId : idProduct
+    }}).then(result=>{
+
+        alert("produit ajouté à votre liste de commandes")
+
+    }).catch(error=>{
+        console.log(error);
+    })
+}
+
+if(loading) console.log(loading);
+if(error) console.log(error);
+if(data){
+    const product = data["product"]
+
+    Product = {
+        title : product.title,
+        description : product.description,
+        price : product.priceHT,
+        userId : product.userId
+
+    }
+
+}
+
+console.log(Product);
     return (
         <div>
             <Navbar role = {ROLE} />
@@ -17,15 +87,22 @@ const Product = () => {
                 </div>
 
                 <div className={styles.productInfo}>
-                    <h1 className={styles.productTitle}> new adidas shoes</h1>
-                    <p className={styles.productDescription}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus distinctio corporis libero! Hic magni labore vitae id debitis dolore. Natus maxime ut incidunt eveniet iusto similique velit soluta recusandae quasi.</p>
+                    <h1 className={styles.productTitle}> {Product.title} </h1>
+                    <p className={styles.productDescription}> {Product.description}</p>
                     
-                    <h3 className={styles.productPrice}>200£</h3>
-                    <button className={styles.AddCart}> Ajouter à cart</button>
-                    <button className={styles.AddWish}> ajouter sur wish list</button>
+                    <h3 className={styles.productPrice}>{Product.price} €
+</h3>
+                   <div className={styles.buttonContainer}>
+
+                        <button onClick={AddToCartHandler} className={styles.AddCart}> Ajouter à cart</button>
+                   
+                    <span> <MdFavorite className={styles.AddWish} />  </span>
+                   </div>
                 </div>
 
             </div>
+            
+            {Product.userId ? <Map userAdress = {Product.userId}  /> : <p> loading ...</p>}
 
              
         </div>
