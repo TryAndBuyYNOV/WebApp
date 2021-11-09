@@ -1,0 +1,74 @@
+.profilePic {
+  color: transparent;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  transition: all .3s ease;
+}
+
+.profilePic input {
+  display: none;
+}
+
+.profilePic img {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 165px;
+  height: 165px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+          box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+  border-radius: 100px;
+  z-index: 0;
+}
+
+.profilePic .label {
+  cursor: pointer;
+  height: 165px;
+  width: 165px;
+}
+
+.profilePic:hover .label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  color: #fafafa;
+  -webkit-transition: background-color .2s ease-in-out;
+  transition: background-color .2s ease-in-out;
+  border-radius: 100px;
+  margin-bottom: 0;
+}
+
+.profilePic span {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: .2em;
+  height: 2em;
+}
+
+.profilePic svg {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: .2em;
+  height: 2em;
+}
+/*# sourceMappingURL=picture.module.css.map */
