@@ -5,18 +5,41 @@ import Map from '../../../components/GoogleMap/map'
 import {useRouter} from 'next/router'
 import {gql , useQuery , useMutation} from '@apollo/client'
 import {MdFavorite} from 'react-icons/all'
+import Carousel from "react-multi-carousel";
 const Product = () => {
 
     let Product = {
         title : "",
         description : "",
         price : "",
-        userId : null
+        userId : null,
+        imgUrl : []
     }
     const router = useRouter()
     const IDUSER = JSON.parse(localStorage.getItem("user")).id
     const ROLE  =  JSON.parse(localStorage.getItem("user")).role
     const idProduct = router.query.id
+    const IMAGE_URL = "https://res.cloudinary.com/dr5vzrsj1/image/upload/v1636476993/tryandbuy/"
+
+    // for carousel 
+
+    const responsive = {
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 1,
+            slidesToSlide: 1 // optional, default to 1.
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 1,
+            slidesToSlide: 1 // optional, default to 1.
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1,
+            slidesToSlide: 1 // optional, default to 1.
+        }
+};
     
     // gql query 
     const QueryGetProduct = gql`
@@ -69,13 +92,26 @@ if(data){
         title : product.title,
         description : product.description,
         price : product.priceHT,
-        userId : product.userId
+        userId : product.userId,
+        imgUrl : product.imgUrl
+        
 
     }
 
 }
 
-console.log(Product);
+let imageList = <div> loading...</div>
+
+if(Product.imgUrl.length>0){
+
+   imageList = Product.imgUrl.map(image=>{
+        return  <div style={{width:"500px" , height:"500px"}}>
+                                <img style={{width:"100%" , height:"100%"}} 
+                                src={IMAGE_URL+image+".png"} 
+                                alt="" srcset="" />
+                            </div>
+    })
+}
     return (
         <div>
             <Navbar role = {ROLE} />
@@ -83,7 +119,26 @@ console.log(Product);
             <div className={styles.container}>
 
                 <div className={styles.productPictur}>
-                    <img className={styles.productImg} src="https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/a8080c6d00924b9f8673a9c300cf22f9_9366/Chaussure_U_Path_Run_Noir_G27636_01_standard.jpg" alt="" />      
+
+                <Carousel
+                        autoPlay={true}
+                        autoPlaySpeed={2000}
+                        infinite={true}  
+                        showDots={true}
+                        responsive={responsive}
+                        containerClass="carousel-container"
+                        dotListClass="custom-dot-list-style"
+                        itemClass="carousel-item-padding-40-px"
+                        
+                        >
+                           
+                            {imageList}           
+                        
+                </Carousel>
+
+
+
+
                 </div>
 
                 <div className={styles.productInfo}>
