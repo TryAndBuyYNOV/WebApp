@@ -14,7 +14,7 @@ query{
         title
         category
         priceHT
-         
+        imgUrl
         }
     }
 `
