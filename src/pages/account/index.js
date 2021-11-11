@@ -19,9 +19,14 @@ const index = () => {
     }
 
     return (
-        <div>
-            <Navbar role={role} />
-            {UserInterface }
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+            <div>
+        <Navbar role={role} />
+            </div>
+            <div> 
+          {UserInterface }
+            </div>
+          
         </div>
     );
 };

@@ -1,11 +1,10 @@
 .container{
-
-   
     background: #D3D3D3;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 2rem;
+    text-align: center;
+ 
 }
 
 .productImg{
@@ -13,6 +12,8 @@
     height: 65%;
     border-radius: 10px;
 }
+
+
 
 .productPictur{
     width: 50%;
@@ -34,6 +35,8 @@
     font-family: cursive;
     text-transform: uppercase;
     cursor: pointer;
+    width: 50%;
+    height: 50%;
 }
 
 .productTitle{
@@ -82,3 +85,9 @@
     
 }
 
+
+.maincontainer{
+    
+    width: calc(100vw - 260px);
+    margin-left: 1rem;
+}

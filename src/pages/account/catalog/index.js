@@ -27,8 +27,11 @@ if(data){
     RESULT = <ProductList role ="catalog" filterCategory={filterCategory}  data={data["productCatalog"]} />
 }
     return (
-        <div>
-            <Navbar role = "Buyer" />
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+            <div>
+                <Navbar role = "Buyer" />
+            </div>
+            <div>
             <button onClick={()=> setFilter("all")}>tout les produits</button>
             <button onClick={()=> setFilter("Shoes")}>Chaussure</button>
             <button onClick={()=> setFilter("TShirt")}>T-Shirt</button>
@@ -39,6 +42,7 @@ if(data){
 
 
             {RESULT}
+            </div>
         </div>
     );
 };

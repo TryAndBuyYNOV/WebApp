@@ -105,7 +105,7 @@ let imageList = <div> loading...</div>
 if(Product.imgUrl.length>0){
 
    imageList = Product.imgUrl.map(image=>{
-        return  <div style={{width:"500px" , height:"500px"}}>
+        return  <div style={{width:"450px" , height:"450px"}}>
                                 <img style={{width:"100%" , height:"100%"}} 
                                 src={IMAGE_URL+image+".png"} 
                                 alt="" srcset="" />
@@ -113,28 +113,30 @@ if(Product.imgUrl.length>0){
     })
 }
     return (
-        <div>
-            <Navbar role = {ROLE} />
+        <div style={{display:"flex" , justifyContent:"space-between"}} >
+            <div>
+                 <Navbar role={ROLE}/> 
+            </div>
+           
 
-            <div className={styles.container}>
+                    <div className={styles.maincontainer}>
+                   <div className={styles.container}>
 
                 <div className={styles.productPictur}>
 
-                <Carousel
+         
+                    <Carousel
                         autoPlay={true}
                         autoPlaySpeed={2000}
                         infinite={true}  
                         showDots={true}
                         responsive={responsive}
-                        containerClass="carousel-container"
-                        dotListClass="custom-dot-list-style"
-                        itemClass="carousel-item-padding-40-px"
-                        
                         >
                            
                             {imageList}           
                         
                 </Carousel>
+          
 
 
 
@@ -145,8 +147,7 @@ if(Product.imgUrl.length>0){
                     <h1 className={styles.productTitle}> {Product.title} </h1>
                     <p className={styles.productDescription}> {Product.description}</p>
                     
-                    <h3 className={styles.productPrice}>{Product.price} €
-</h3>
+                    <h3 className={styles.productPrice}>{Product.price} €</h3>
                    <div className={styles.buttonContainer}>
 
                         <button onClick={AddToCartHandler} className={styles.AddCart}> Ajouter à cart</button>
@@ -155,9 +156,12 @@ if(Product.imgUrl.length>0){
                    </div>
                 </div>
 
-            </div>
+                    </div>
             
             {Product.userId ? <Map userAdress = {Product.userId}  /> : <p> loading ...</p>}
+            </div>
+           
+         
 
              
         </div>

@@ -1,0 +1,94 @@
+.container {
+  background: #D3D3D3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2rem;
+  text-align: center;
+}
+
+.productImg {
+  width: 65%;
+  height: 65%;
+  border-radius: 10px;
+}
+
+.productPictur {
+  width: 50%;
+  height: 50%;
+}
+
+.productInfo {
+  text-align: center;
+}
+
+.productInfo .AddCart {
+  display: block;
+  margin: 1rem auto;
+  color: black;
+  padding: 1rem;
+  background: #FFC300;
+  outline: none;
+  border: none;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  font-family: cursive;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 50%;
+  height: 50%;
+}
+
+.productInfo .productTitle {
+  font-family: cursive;
+}
+
+.productInfo .productDescription {
+  font-size: 1rem;
+  font-family: serif;
+}
+
+.productInfo .AddWish {
+  display: block;
+  margin: 1rem auto;
+  color: black;
+  padding: 1rem;
+  background: #CD5C5C;
+  outline: none;
+  color: wheat;
+  border: none;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  font-family: cursive;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 2.3rem;
+}
+
+.productInfo .productPrice {
+  font-size: 1.5rem;
+  font-family: cursive;
+  color: #C70039;
+}
+
+.productInfo .buttonContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.productInfo .buttonContainer span {
+  margin: 0 1rem;
+}
+
+.maincontainer {
+  width: calc(100vw - 260px);
+  margin-left: 1rem;
+}
+/*# sourceMappingURL=catalog.module.css.map */
