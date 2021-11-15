@@ -20,6 +20,7 @@ const ManageProduct = () => {
         priceHT
         category
         productStatus
+        imgUrl
   }
 }
     `
@@ -38,22 +39,21 @@ const ManageProduct = () => {
      
      return (
         <div style={{
-         textAlign:'center',
          display:"flex",
-         flexDirection:'column',
-         justifyContent:"center",
-         alignItems:"center"
+        
      }}
      >
-         
+         <div>
          <Navbar role={ROLE} />
-
+         </div>
+            <div style={{ textAlign:'center',}}>
             <h1> Mes ventes </h1>
             <button onClick ={()=>setFilter("all")}> tout les produit</button>
             <button onClick ={()=>setFilter("ToSell")}> produits à vendre</button>
             <button onClick ={()=>setFilter("SellingInProgress")}> produits en cours de vente</button>
             <button onClick ={()=>setFilter("Selled")}> produits vendus</button>                     
             {UIResult} 
+            </div>
             
         </div>
     );

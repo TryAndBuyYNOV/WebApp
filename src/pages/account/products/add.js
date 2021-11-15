@@ -116,15 +116,14 @@ const [AddProductFunction,{data , loading , error}] = useMutation(ADD_PRODUCT)
    
       return (
      <div style={{
-         textAlign:'center',
+         
          display:"flex",
-         flexDirection:'column',
-         justifyContent:"center",
-         alignItems:"center"
+         
      }}>
-
+            <div>
             <Navbar role={ROLE} />
-
+            </div>
+            <div style={{textAlign:'center' , margin:"0 auto"}}>
                     <h1> AJOUTER PRODUIT </h1>
                  <form onSubmit={onSubmitProduct}>
                 <label htmlFor="title" className={styles.Label}>Titre:</label>
@@ -182,6 +181,7 @@ const [AddProductFunction,{data , loading , error}] = useMutation(ADD_PRODUCT)
              
 
                 </form>
+                </div>
             </div>
       )
 };

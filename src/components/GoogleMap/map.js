@@ -49,7 +49,7 @@ const Map  = ({userAdress})=> {
  
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '400px', width: '80%' , margin : "2rem auto " }}>
+      <div style={{ height: '400px', width: '100%' , margin : "2rem auto " }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key:"AIzaSyAXcZLzg7Ut2hABj8Yo2ekpYuowcwKeBas"}}
           defaultZoom={13}
