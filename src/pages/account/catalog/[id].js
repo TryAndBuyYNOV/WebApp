@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import Navbar from 'components/Account/Navbar';
 import styles from "./catalog.module.scss"
 import Map from '../../../components/GoogleMap/map'
@@ -6,6 +6,7 @@ import {useRouter} from 'next/router'
 import {gql , useQuery , useMutation} from '@apollo/client'
 import {MdFavorite} from 'react-icons/all'
 import Carousel from "react-multi-carousel";
+import Menu from 'components/Menu/menu';
 const Product = () => {
 
     let Product = {
@@ -15,6 +16,7 @@ const Product = () => {
         userId : null,
         imgUrl : []
     }
+    const [menu , setMenu] = useState(false)
     const router = useRouter()
     const IDUSER = JSON.parse(localStorage.getItem("user")).id
     const ROLE  =  JSON.parse(localStorage.getItem("user")).role
@@ -59,28 +61,45 @@ const Product = () => {
     // gql mutation 
     
     const MutationAddToCart = gql `
-    
-    mutation AddToCart ($userId : ID ! , $productId : ID !){
-  addToCart(userId : $userId,
-    productId : $productId)
-    {id}
-} 
+    mutation AddToCart (
+  			$buyerID :ID! , 
+  			$sellerID : ID! ,
+  			$productID : ID! ){
+  
+  createCart(buyerID: $buyerID ,
+  		sellerID :$sellerID ,
+  		productID:$productID
+  ){id
+  }}
 `
 // call gql api 
 const {loading , error , data} = useQuery(QueryGetProduct , {variables : {id : idProduct}})
-const [AddToCartFunction , {dataCart , loadingCart , errorCart }] = useMutation(MutationAddToCart)
+const [AddToCartMutation , {dataCart , loadingCart , errorCart }] = useMutation(MutationAddToCart)
 
 const AddToCartHandler = ()=>{
-    AddToCartFunction({variables : {
-        userId : IDUSER ,
-        productId : idProduct
-    }}).then(result=>{
 
-        alert("produit ajouté à votre liste de commandes")
+    setMenu(true)
+    
+}
 
+const validateCommand = ()=>{
+
+    AddToCartMutation({
+        variables:{
+            buyerID :IDUSER,
+            sellerID: Product.userId,
+            productID: idProduct,
+
+        }
+    }).then(result=>{
+        alert("produit ajouté à vos commandes")
+        setMenu(false)
     }).catch(error=>{
-        console.log(error);
+        alert("something get wrong ")
+        setMenu(false)
     })
+    
+  
 }
 
 if(loading) console.log(loading);
@@ -119,12 +138,18 @@ if(Product.imgUrl.length>0){
             </div>
            
 
-                    <div className={styles.maincontainer}>
+                   <div className={styles.maincontainer}>
                    <div className={styles.container}>
 
                 <div className={styles.productPictur}>
 
-         
+                      <Menu
+                       menu={menu}
+                       title={Product.title}
+                       price = {Product.price}
+                       closeMenu={()=>setMenu(false)}
+                       validation = {validateCommand}
+                       />
                     <Carousel
                         autoPlay={true}
                         autoPlaySpeed={2000}
@@ -135,10 +160,10 @@ if(Product.imgUrl.length>0){
                            
                             {imageList}           
                         
-                </Carousel>
+                    </Carousel>
           
 
-
+              
 
 
                 </div>

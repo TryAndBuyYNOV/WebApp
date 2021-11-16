@@ -111,8 +111,8 @@ const GeoLocalisation = () => {
         event.preventDefault()
         const searchWord = searchRef.current.value
          if(searchWord.replace(/\s/g, '')===""){
-             
-            //setMarkers(refProduct.current)
+            
+            setMarkers(refProduct.current)
            
         }
         else{
