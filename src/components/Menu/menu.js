@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './image.module.css'
+import styles from './menu.module.css'
 const Menu = ({menu , closeMenu , title , price , validation}) => {
        
 

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState  } from 'react';
 import Navbar from '../../components/Account/Navbar';
 import Buyer from '../../components/Buyer/Buyer';
 import Seller from '../../components/Seller/Seller';
 
 const index = () => {
 
-    const role = JSON.parse(localStorage.getItem("user")).role
+     const role = JSON.parse(localStorage.getItem("user")).role
 
-    let UserInterface = <p> erreur</p>
+    
+
+    let UserInterface = <p> {role}</p>
 
     if(role=="Buyer"){
 
@@ -21,7 +23,7 @@ const index = () => {
     return (
         <div style={{display:"flex", justifyContent:"space-between"}}>
             <div>
-        <Navbar role={role} />
+            <Navbar role={role} />
             </div>
             <div> 
           {UserInterface }
@@ -29,6 +31,11 @@ const index = () => {
           
         </div>
     );
+
+     
 };
+
+
+
 
 export default index;

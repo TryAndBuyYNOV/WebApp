@@ -23,7 +23,8 @@ const Navbar = ({role}) => {
                 <li> <Link href="/account/profile" > Mon profile </Link> </li>
                 <li> <Link href="/account/products/add" > Ajouter produit </Link> </li>
                  <li> <Link href="/account/products/manage" > Mes ventes </Link> </li>
-                <li> <Link href="" > Mes offres </Link> </li>
+                <li> <Link href="/account/offers" > Mes offres </Link> </li>
+                <li> <Link href="" > Déconnexion  </Link> </li>
             </ul>
         </nav>
     }
@@ -37,9 +38,11 @@ const Navbar = ({role}) => {
             </header>
             <ul className={styles.list}>
                 <li> <Link href="/account/profile" > Mon profile </Link> </li>
-                <li> <Link href="" > Mes commandes </Link> </li>
+                <li> <Link href="/account/orders" > Mes commandes </Link> </li>
                 <li> <Link href="/account/catalog" > Catalogues </Link> </li>
                 <li> <Link href="/account/geolocalisation" > géolocalisation  </Link> </li>
+                <li> <Link href="" > Déconnexion  </Link> </li>
+                
              
             </ul>
         </nav>
