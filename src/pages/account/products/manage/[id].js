@@ -132,17 +132,16 @@ useEffect(()=>{
 
 
     return (
-     <div tyle={{
-         textAlign:'center',
+     <div style={{
          display:"flex",
-         flexDirection:'column',
-         justifyContent:"center",
-         alignItems:"center"
+      
      }}>
-
-            <Navbar role={ROLE} />
+                <div>
+                      <Navbar role={ROLE} />
+                </div>
            
-
+           
+                <div style={{textAlign:'center', margin:"0 auto"}}>
                  <form onSubmit={onSubmitProduct}>
                 <label htmlFor="title" className={styles.Label}>Titre:</label>
                 <input type="text" style={{
@@ -213,6 +212,7 @@ useEffect(()=>{
                 }} className={styles.SearchAdmin} type="submit"> Supprimer </button>
 
                 </form>
+                 </div>
             </div>
       )
 };

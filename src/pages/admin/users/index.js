@@ -11,7 +11,7 @@ const users = () => {
     const isUpdated = useRef(false) 
     const UsersQuery = gql `
         query {
-             users{ id firstName lastName role}
+             users{ id firstName lastName role avatar}
         }
     `
         

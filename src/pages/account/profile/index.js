@@ -184,6 +184,9 @@ mutation DeleteUser($id:ID!){
         return (
             <AutoComplete className={styles.SearchAdmin} 
             value={inputValue}
+            style={{
+                    marginLeft:"4rem"
+                }}
            onChange={onChangeInputHandler}
         apiKey={"AIzaSyAXcZLzg7Ut2hABj8Yo2ekpYuowcwKeBas"}
         onPlaceSelected={(place)=>{
@@ -206,21 +209,21 @@ console.log(Forms);
     return (
      <div
       style={{
-         textAlign:'center',
          display:"flex",
-         flexDirection:'column',
-         justifyContent:"center",
-         alignItems:"center"
+         
+      
      }}
      >
-         
+         <div>
          <Navbar role={ROLE} />
-
-            <h1> Mon profile</h1>
+         </div>
+            <div>
+            
             <div style={{
-                marginLeft:"10rem"
+                marginLeft:"10rem",
+                 textAlign:'center',
             }}>
-              
+              <h1> Mon profile</h1>
 
                 <form onSubmit={onSubmitUser}>
                       <label htmlFor="firstName" className={styles.Label}>Nom:</label>
@@ -279,6 +282,7 @@ console.log(Forms);
                 
 
 
+            </div>
             </div>
 
             </div>

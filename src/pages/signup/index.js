@@ -3,6 +3,9 @@ import styles from  './SignUp.module.scss'
 import {gql , useMutation} from '@apollo/client'
 import AutoComplete from 'react-google-autocomplete'
 import {useRouter} from 'next/router'
+import ProfilPicture from 'components/Profile/picture';
+import image from '../../assets/team/member-5.png'
+import axios from  'axios'
 const index = () => {
 
     // Hooks
@@ -18,9 +21,12 @@ const index = () => {
             localisation:""
         },
         role: "Seller",
-        avatar:""
     })
     const [isError , setError] = useState(false)
+     const [picturData , setPictur] = useState({
+         pictur : image,
+         file : ""
+     })
     const router = useRouter()
     const isRef = useRef(false)
     //GraphQl queries 
@@ -45,14 +51,30 @@ const [createUserFunction , {data , loading , error}] = useMutation(creatUser)
     const SubmitForms = (e)=>{
         e.preventDefault()
         isRef.current = true
-        createUserFunction({variables:{
+        const data = new FormData()
+        data.append("file", picturData.file)
+        data.append("upload_preset" , "tryandbuy")
+        axios.post("https://api.cloudinary.com/v1_1/dr5vzrsj1/image/upload" , data).
+         then(result=>{
+        const picturName = result["data"].public_id.split("/")[1];
+            
+        doSignUp(picturName)
+
+        }).catch(error=>{
+        console.log(error);
+            })}
+       
+
+    const doSignUp = (picturName)=>{
+
+         createUserFunction({variables:{
             firstName : Forms.firstName,
             lastName : Forms.lastName,
             phoneNumber : Forms.numero,
             address : Forms.address,
             email : Forms.email,
             password : Forms.password ,
-            avatar : Forms.avatar ,
+            avatar : picturName ,
             role : Forms.role
         }}).then(result=>{  
            if(result.data.createUser==null){
@@ -67,7 +89,8 @@ const [createUserFunction , {data , loading , error}] = useMutation(creatUser)
         }).catch(error=>{
             console.log(error);
         })
-   
+
+
     }
     const FormsOnChange = (e)=>{
         const name = e.target.name
@@ -76,6 +99,17 @@ const [createUserFunction , {data , loading , error}] = useMutation(creatUser)
             ...Forms,
             [name] : value
         })
+    }
+
+       
+    const changePicturHandler = (event)=>{
+
+        const path = URL.createObjectURL(event.target.files[0])
+        setPictur({
+            pictur :path ,
+            file : event.target.files[0]
+        })
+
     }
 
    
@@ -117,6 +151,7 @@ const [createUserFunction , {data , loading , error}] = useMutation(creatUser)
             <h1> Sign Up</h1>
             <p style={{display : isError ? "block" : "none"}} className={styles.ErrorMessage}> email existe dèja</p>
          <form onSubmit={SubmitForms}>
+             <ProfilPicture profilePic={picturData} changeHandler = {changePicturHandler} />
             <input type="text" className={styles.signupForms} placeholder="Nom..." name="firstName" value={Forms.firstName} onChange={FormsOnChange} />
             <input type="text" className={styles.signupForms} placeholder="Prénom..." name="lastName" value={Forms.lastName} onChange={FormsOnChange} />
             <input type="text" className={styles.signupForms} placeholder="Numéro de télephone..." name="numero" value={Forms.numero} onChange={FormsOnChange} />

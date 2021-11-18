@@ -2,11 +2,16 @@ import React from 'react';
 import styles from './ProductItem.module.css'
 import Link from 'next/link'
 const ProductItem = (props) => {
-    
+  
+
+const IMAGE_URL = "https://res.cloudinary.com/dr5vzrsj1/image/upload/v1636476993/tryandbuy/"    
    let link =""
 
    if(props.role=="admin"){
        link =`/admin/products/${encodeURIComponent(props.id)}` 
+   }
+    if(props.role=="catalog"){
+     link = `/account/catalog/${encodeURIComponent(props.id)}`
    }
 
    else {
@@ -48,7 +53,7 @@ const ProductItem = (props) => {
             
                   <div className={styles.ourTeam}>
             <div className={styles.picture}>
-                <img className="img-fluid" src="https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/a8080c6d00924b9f8673a9c300cf22f9_9366/Chaussure_U_Path_Run_Noir_G27636_01_standard.jpg"/>
+                <img className="img-fluid" src={IMAGE_URL+props.pictur+".png"}/>
             </div>
             <div className="team-content">
                 <h3 className={styles.name}>{props.title}</h3>
