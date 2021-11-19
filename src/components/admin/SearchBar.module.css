@@ -31,3 +31,8 @@
     color: purple;
 
 }
+
+.ErrorMessage{
+    color:red;
+    font-weight: bold;
+}
