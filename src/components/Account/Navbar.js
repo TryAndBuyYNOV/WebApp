@@ -44,8 +44,6 @@ const Navbar = ({role}) => {
                 <li> <Link href="/account/catalog" > Catalogues </Link> </li>
                 <li> <Link href="/account/geolocalisation" > géolocalisation  </Link> </li>
                 <li>    <button onClick={()=>Deconnect()}> Déconnexion  </button> </li>
-                
-             
             </ul>
         </nav>
     }
