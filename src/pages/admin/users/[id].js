@@ -4,7 +4,7 @@ import NavBarAdmin from '../../../Components/Admin/NavBarAdmin';
 import {gql , useQuery , useMutation} from '@apollo/client'
 import styles from '../../../Components/Admin/SearchBar.module.css'
 import AutoComplete from 'react-google-autocomplete'
-
+import withAuth from 'HOC/withAuth';
 const User = () => {
 
     // React Hooks
@@ -280,4 +280,4 @@ console.log(Forms);
     );
 };
 
-export default User;
+export default withAuth(User);

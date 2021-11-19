@@ -3,6 +3,7 @@ import {gql , useQuery , useMutation} from '@apollo/client'
 import Navbar from 'components/Account/Navbar';
 import Table from 'components/Table/table';
 import {client} from '../../../pages/_app'
+import withAuth from 'HOC/withAuth';
 const Offers = () => {
 
     const [CartStat , setCart] = useState(null)
@@ -112,4 +113,4 @@ if(data && CartStat==null){
     );
 };
 
-export default Offers;
+export default withAuth(Offers);

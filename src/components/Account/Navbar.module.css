@@ -173,6 +173,20 @@
 
 }
 
+.list li>button{
+  
+  text-decoration: none;
+  color: wheat;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  background: purple;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+}
+
 .Name{
   color : #FFFF00;
   font-family: cursive;

@@ -2,7 +2,7 @@ import React, { useState  } from 'react';
 import Navbar from '../../components/Account/Navbar';
 import Buyer from '../../components/Buyer/Buyer';
 import Seller from '../../components/Seller/Seller';
-
+import withAuth from '../../HOC/withAuth'
 const index = () => {
 
      const role = JSON.parse(localStorage.getItem("user")).role
@@ -38,4 +38,4 @@ const index = () => {
 
 
 
-export default index;
+export default withAuth(index);

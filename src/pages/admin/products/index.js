@@ -3,6 +3,7 @@ import {gql , useQuery} from '@apollo/client'
 import NavBarAdmin from '../../../Components/Admin/NavBarAdmin';
 import SearchBarAdmin from '../../../Components/Admin/SearchBarAdmin';
 import ProductList from '../../../Components/Admin/ProductList';
+import withAuth from 'HOC/withAuth';
 const products = () => {
   
     let [UIResult , setUIResult ]= useState(<p></p>)
@@ -62,4 +63,4 @@ const products = () => {
 
 };
 
-export default products;
+export default withAuth(products);

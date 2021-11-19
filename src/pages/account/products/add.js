@@ -3,7 +3,7 @@ import styles from '../../../components/admin/SearchBar.module.css'
 import Navbar from '../../../components/Account/Navbar'
 import {gql, useMutation} from '@apollo/client'
 import axios from 'axios'
-
+import withAuth from 'HOC/withAuth'
 const AddProduct = () => {
 
     // React Hooks
@@ -186,4 +186,4 @@ const [AddProductFunction,{data , loading , error}] = useMutation(ADD_PRODUCT)
       )
 };
 
-export default AddProduct;
+export default withAuth(AddProduct);

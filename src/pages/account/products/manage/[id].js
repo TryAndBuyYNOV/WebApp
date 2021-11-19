@@ -3,6 +3,7 @@ import styles from '../../../../components/admin/SearchBar.module.css'
 import {gql , useQuery , useMutation} from '@apollo/client' 
 import { useRouter } from 'next/router';
 import Navbar from 'components/Account/Navbar';
+import withAuth from 'HOC/withAuth';
 const Product = () => {
 
     // React Hooks
@@ -217,4 +218,4 @@ useEffect(()=>{
       )
 };
 
-export default Product;
+export default withAuth(Product);

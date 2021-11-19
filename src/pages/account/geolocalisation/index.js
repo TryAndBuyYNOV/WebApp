@@ -5,6 +5,7 @@ import {gql , useQuery} from '@apollo/client'
 import {client} from '../../_app'
 import ProductMarker from 'components/GeoMap/ProductMarker';
 import styles from "../../../components/admin/SearchBar.module.css"
+import withAuth from "../../../HOC/withAuth"
 const GeoLocalisation = () => {
    
 
@@ -150,4 +151,4 @@ const GeoLocalisation = () => {
     );
 };
 
-export default GeoLocalisation;
+export default withAuth(GeoLocalisation);

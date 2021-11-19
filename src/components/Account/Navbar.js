@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link'
 import styles from  './Navbar.module.css'
+import router from 'next/router';
 const Navbar = ({role}) => {
 
     const firstName = JSON.parse(localStorage.getItem("user")).firstName
@@ -24,7 +25,7 @@ const Navbar = ({role}) => {
                 <li> <Link href="/account/products/add" > Ajouter produit </Link> </li>
                  <li> <Link href="/account/products/manage" > Mes ventes </Link> </li>
                 <li> <Link href="/account/offers" > Mes offres </Link> </li>
-                <li> <Link href="" > Déconnexion  </Link> </li>
+                <li> <button onClick={()=>Deconnect()} href="" > Déconnexion  </button> </li>
             </ul>
         </nav>
     }
@@ -41,12 +42,18 @@ const Navbar = ({role}) => {
                 <li> <Link href="/account/orders" > Mes commandes </Link> </li>
                 <li> <Link href="/account/catalog" > Catalogues </Link> </li>
                 <li> <Link href="/account/geolocalisation" > géolocalisation  </Link> </li>
-                <li> <Link href="" > Déconnexion  </Link> </li>
+                <li>    <button onClick={()=>Deconnect()}> Déconnexion  </button> </li>
                 
              
             </ul>
         </nav>
     }
+
+    const Deconnect = ()=>{
+        localStorage.clear()
+        router.push("/")
+    }
+
     return (
         <div>
             {navbar}

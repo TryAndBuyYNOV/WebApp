@@ -1,8 +1,9 @@
 import Navbar from 'components/Account/Navbar';
 import React, { useState } from 'react';
 import Table from '../../../components/Table/table'
-import {gql , useQuery} from '@apollo/client'
+import {gql , useQuery , useMutation} from '@apollo/client'
 import {client} from '../../../pages/_app'
+import withAuth from '../../../HOC/withAuth'
 
 const Orders = () => {
 
@@ -41,9 +42,13 @@ const getProductQuery = gql`
         }
 }
 `
-
+const MakeDecision = gql`
+mutation MakeDecision($id:ID! , $decision:String!){
+  decisionCart(id:$id , decision:$decision){id}
+}
+`
 const {loading , error , data} = useQuery(getCartQuery , {variables:{id:userID}})
-
+const [DecisionFunctionMutation, { dataD, loadingD, errorD }] = useMutation(MakeDecision);
 const getUserData = async (userID)=>{
     const user = await  client.query({query : getUserQuer , variables :{id:userID} })
     const data = user["data"].user
@@ -98,7 +103,7 @@ if(data && CartStat==null){
                  <button> orders acceptés</button>
                  <button> orders réfusés</button>
              </div>
-            <Table cart={CartStat} isBuyer={true} />     
+            <Table cart={CartStat} isBuyer={true} DecisionFunction={DecisionFunctionMutation} />     
         </div>   
 
         </div>
@@ -106,4 +111,4 @@ if(data && CartStat==null){
     );
 };
 
-export default Orders;
+export default withAuth(Orders);

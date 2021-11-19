@@ -10,7 +10,7 @@ const IMAGE_URL = "https://res.cloudinary.com/dr5vzrsj1/image/upload/v1636476993
    if(props.role=="admin"){
        link =`/admin/products/${encodeURIComponent(props.id)}` 
    }
-    if(props.role=="catalog"){
+    else if(props.role=="catalog"){
      link = `/account/catalog/${encodeURIComponent(props.id)}`
    }
 
@@ -51,7 +51,7 @@ const IMAGE_URL = "https://res.cloudinary.com/dr5vzrsj1/image/upload/v1636476993
     return (
         <Link href={link}>
             
-                  <div className={styles.ourTeam}>
+                  <div className={styles.Product}>
             <div className={styles.picture}>
                 <img className="img-fluid" src={IMAGE_URL+props.pictur+".png"}/>
             </div>

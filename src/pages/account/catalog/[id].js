@@ -4,9 +4,10 @@ import styles from "./catalog.module.scss"
 import Map from '../../../components/GoogleMap/map'
 import {useRouter} from 'next/router'
 import {gql , useQuery , useMutation} from '@apollo/client'
-import {MdFavorite} from 'react-icons/all'
+import {MdFavorite} from 'react-icons/md'
 import Carousel from "react-multi-carousel";
 import Menu from 'components/Menu/menu';
+import withAuth from '../../../HOC/withAuth'
 const Product = () => {
 
     let Product = {
@@ -193,4 +194,4 @@ if(Product.imgUrl.length>0){
     );
 };
 
-export default Product;
+export default withAuth(Product);

@@ -4,6 +4,7 @@ import {gql , useQuery , useMutation} from '@apollo/client'
 import styles from '../../../Components/Admin/SearchBar.module.css'
 import AutoComplete from 'react-google-autocomplete'
 import Navbar from '../../../components/Account/Navbar'
+import withAuth from '../../../HOC/withAuth'
 const Profile = () => {
 
     // React Hooks
@@ -289,4 +290,4 @@ console.log(Forms);
     );
 };
 
-export default Profile;
+export default withAuth(Profile);

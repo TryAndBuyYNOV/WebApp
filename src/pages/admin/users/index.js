@@ -4,7 +4,7 @@ import {gql , useQuery} from '@apollo/client'
 import NavBarAdmin from '../../../Components/Admin/NavBarAdmin';
 import SearchBarAdmin from '../../../Components/Admin/SearchBarAdmin';
 import UserList from '../../../Components/Admin/UserList';
-
+import withAuth from 'HOC/withAuth';
 const users = () => {
 
     let [UIResult , setUIResult] = useState(<p></p>)
@@ -69,4 +69,4 @@ const users = () => {
     );
 };
 
-export default users;   
+export default withAuth(users);   

@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBarAdmin from '../../Components/Admin/NavBarAdmin';
-
+import withAuth from 'HOC/withAuth';
 const admin = () => {
     
     return (
@@ -15,4 +15,4 @@ const admin = () => {
     );
 };
 
-export default admin;
+export default withAuth(admin);

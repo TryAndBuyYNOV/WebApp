@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from "../../../components/Account/Navbar"
 import ProductList from '../../../components/admin/ProductList'
 import { gql , useQuery} from '@apollo/client'
+import withAuth from '../../../HOC/withAuth'
 const index = () => {
     
     const [filterCategory , setFilter] = useState("all")
@@ -47,4 +48,4 @@ if(data){
     );
 };
 
-export default index;
+export default withAuth(index);

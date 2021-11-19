@@ -2,6 +2,7 @@ import React, {useState } from 'react';
 import {gql , useQuery} from '@apollo/client'
 import Navbar from 'components/Account/Navbar';
 import ProductList from '../../../../Components/Admin/ProductList';
+import withAuth from 'HOC/withAuth';
 const ManageProduct = () => {
 
   
@@ -62,4 +63,4 @@ const ManageProduct = () => {
 
 };
 
-export default ManageProduct;
+export default withAuth(ManageProduct);

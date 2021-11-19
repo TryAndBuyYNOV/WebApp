@@ -28,8 +28,7 @@ const acceptCommand = (index, id , des)=>{
 
 const refuseCommand = (index , id , des)=>{
 
-  console.log(id);
-  console.log(des);
+  
  
  DecisionFunction({variables: {
    id : id,
@@ -44,6 +43,29 @@ const refuseCommand = (index , id , des)=>{
  
 }
 
+const payCommand = (index)=>{
+  const newCart = [...cartStat]
+    newCart[index].cartStatus = "Payed"
+    setCartStat(newCart)
+}
+
+const cancelCommand = (index , id , des)=>{
+
+ DecisionFunction({variables: {
+   id : id,
+   decision : des
+ }}).then(result=>{
+  
+    const newCart = [...cartStat]
+    newCart[index].cartStatus = "Canceled"
+    setCartStat(newCart)
+
+  }).catch(error=>{
+    console.log(error);
+  })
+
+   
+}
 
   
   let UI = <p> loading ...</p>
@@ -54,7 +76,11 @@ const refuseCommand = (index , id , des)=>{
       switch(element.cartStatus){
         case "Validated" : statusFrancais="validé" 
         DecisionSection = isBuyer ?
-         <button className={styles.btnaccept}>Payer</button> :
+          <div className={styles.decisionBuyer}>
+             <button onClick={()=>payCommand(index)}>Payer</button>
+              <button onClick={()=>cancelCommand(index , element.cartId , "Canceled")}> Annuler la commande</button>
+          </div>
+         :
          <div className={styles.acceptSection}>
            Accepté <span>&#10004;</span>
            </div> 
@@ -65,10 +91,22 @@ const refuseCommand = (index , id , des)=>{
           <button onClick={()=>refuseCommand(index,element.cartId ,"Rejected")}  className={styles.btnrefuse}> réfuser</button>
           </div>
         break;
-        case "Rejected" : statusFrancais="réfusé" 
+        case "Rejected" : statusFrancais="refusé" 
           DecisionSection = 
           <div className={styles.refuseSection}>
            Réfusé <span>&#x2717;</span>
+           </div>
+           break;
+              case "Payed" : statusFrancais="payé" 
+          DecisionSection = 
+          <div className={styles.acceptSection}>
+           payé <span>&#10004;</span>
+           </div>
+        break;
+            case "Canceled" : statusFrancais="commande annulée" 
+          DecisionSection = 
+          <div className={styles.refuseSection}>
+           commande annulée <span>&#x2717;</span>
            </div>
         break;
       }
@@ -77,9 +115,9 @@ const refuseCommand = (index , id , des)=>{
     <tr className={styles.tr}>
         <td className={styles.td} data-column="First Name">{element.firstName +" "+element.lastName} </td>
         <td className={styles.td} data-column="Last Name">{element["address"].localisation}</td>
-        <td className={styles.td} data-column="Job Title">{element.title}</td>
-        <td className={styles.td} data-column="Twitter">{element.priceHT+"€"}</td>
-        <td className={styles.td} data-column="Twitter">{statusFrancais}</td>
+        <td className={styles.td} data-column=" Title">{element.title}</td>
+        <td className={styles.td} data-column="Price">{element.priceHT+"€"}</td>
+        <td className={styles.td} data-column="Status">{statusFrancais}</td>
         <td>
             {DecisionSection}
       </td>

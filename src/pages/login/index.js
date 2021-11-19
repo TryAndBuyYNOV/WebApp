@@ -47,10 +47,13 @@ const index = () => {
            
              const decoded = jwt_decode(token)
              const userData = JSON.stringify(decoded)
-
-         localStorage.setItem("user" , userData)
-
-         router.push("/account")
+            localStorage.setItem("user" , userData)
+            if(decoded.role=="Admin"){
+                    router.push("/admin")
+            }else{
+                router.push("/account")
+            }
+            
           
 
            

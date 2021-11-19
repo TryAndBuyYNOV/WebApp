@@ -70,3 +70,21 @@ background: #eee;
 			color: $redColor;
 			
 	}
+
+	.decisionBuyer{
+		button {
+			padding: 0.5rem;
+			background: purple;
+			color: white;
+			text-align: center;
+			font-family: cursive;
+			outline: none;
+			display: block;
+			border:none;
+			width: 100px;
+			margin: 1rem;
+			border-radius: 10px;
+			cursor: pointer;
+			
+		}
+	}
