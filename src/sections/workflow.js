@@ -1,34 +1,31 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import { Container, Grid, Box, Heading, Text } from 'theme-ui';
+import { Container, Grid, Box, Heading, Text, Image } from 'theme-ui';
 import SectionHeader from 'components/section-header';
 
-import PatternBG from 'assets/patternBG.png';
-import ArrowOdd from 'assets/arrowOdd.svg';
-import ArrowEven from 'assets/arrowEven.svg';
+import Avatar1 from 'assets/testimonial/pexels-ayodeji-fatunla-8451911.jpg';
+import Avatar2 from 'assets/testimonial/pexels-mahmoud-abdelwahab-7083673.jpg';
+import Avatar3 from 'assets/testimonial/pexels-pegah-5970787.jpg';
 
 const data = [
   {
     id: 1,
+    avatar: Avatar1,
     title: 'Set disbursement Instructions',
     text:
       'Get your blood tests delivered at home collect a sample from the your blood tests.',
   },
   {
     id: 2,
+    avatar: Avatar2,
     title: 'Assembly retrieves funds from your account',
     text:
       'Get your blood tests delivered at home collect a sample from the your blood tests.',
   },
   {
     id: 3,
+    avatar: Avatar3,
     title: 'Assembly initiates disbursement',
-    text:
-      'Get your blood tests delivered at home collect a sample from the your blood tests.',
-  },
-  {
-    id: 4,
-    title: 'Customer receives funds payment',
     text:
       'Get your blood tests delivered at home collect a sample from the your blood tests.',
   },
@@ -36,14 +33,35 @@ const data = [
 
 export default function WorkFlow() {
   return (
-    <h1>Workflow</h1>
+    <section sx={styles.workflow}>
+      <Container>
+        <SectionHeader css={{ fontsize: 3}}
+          slogan="Our services"
+          title="Right for you"
+          isWhite={true}
+        />
+        <Grid sx={styles.grid}>
+          {data.map((item) => (
+            <Box sx={styles.card} key={item.id}>
+              <div className="image" css={{ borderradius: '50%'}}>
+                <Image css={{ borderradius: '50%'}} src={item.avatar}/>
+              </div>
+              <Box sx={styles.wrapper}>
+                <Heading  sx={styles.wrapper.title}>{item.title}</Heading>
+                <Text sx={styles.wrapper.subTitle}>{item.text}</Text>
+              </Box>
+            </Box>
+
+          )) }
+        </Grid>
+        </Container>
+    </section>
   );
 }
 
 const styles = {
   workflow: {
-    backgroundColor: 'primary',
-    backgroundImage: `url(${PatternBG})`,
+    backgroundColor: '#F4F1EF',
     backgroundRepeat: `no-repeat`,
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
@@ -68,7 +86,7 @@ const styles = {
       null,
       'repeat(2,1fr)',
       null,
-      'repeat(4,1fr)',
+      'repeat(3,1fr)',
     ],
   },
   card: {
@@ -92,18 +110,10 @@ const styles = {
         display: 'none',
       },
     },
-    '&:nth-of-type(2n-1)::before': {
-      backgroundImage: `url(${ArrowOdd})`,
-    },
-    '&:nth-of-type(2n)::before': {
-      backgroundImage: `url(${ArrowEven})`,
-      top: 17,
-    },
-    '&:last-child::before': {
-      display: 'none',
-    },
   },
-
+  avatar:{
+    borderRadius: '50px',
+  },
   iconBox: {
     width: ['50px', null, '60px', null, null, '70px'],
     height: ['50px', null, '60px', null, null, '70px'],
@@ -126,7 +136,7 @@ const styles = {
     mt: '-5px',
     title: {
       fontSize: [3, null, 4, null, null, 5],
-      color: 'white',
+      color: '#707070',
       lineHeight: [1.4, null, null, null, null, 1.55],
       pr: [0, null, null, null, null, 2],
       mb: [2, 3],
@@ -136,7 +146,7 @@ const styles = {
       fontSize: 1,
       fontWeight: 400,
       lineHeight: [1.85, null, null, 1.9, 2],
-      color: 'white',
+      color: '#707070',
       opacity: 0.75,
       pr: [0, null, null, null, null, 5],
     },

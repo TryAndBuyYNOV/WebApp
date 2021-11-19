@@ -33,6 +33,7 @@ export default {
     '1220px',
     '1366px',
     '1620px',
+    '1920px',
   ],
   fonts: {
     body: "'DM Sans', sans-serif",
