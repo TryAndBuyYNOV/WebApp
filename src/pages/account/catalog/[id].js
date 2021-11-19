@@ -73,6 +73,13 @@ const Product = () => {
   ){id
   }}
 `
+const AddToWidhMutation = gql`
+    mutation AddWish($userId :ID! , $productId : ID!){
+    addToWishlist(userId:$userId , productId:$productId)
+    {productId}
+}
+`
+  const [addToWishListFunction, { dataWish, loadingWish, errorWish }] = useMutation(AddToWidhMutation);
 // call gql api 
 const {loading , error , data} = useQuery(QueryGetProduct , {variables : {id : idProduct}})
 const [AddToCartMutation , {dataCart , loadingCart , errorCart }] = useMutation(MutationAddToCart)
@@ -101,6 +108,16 @@ const validateCommand = ()=>{
     })
     
   
+}
+
+const AddToWishList = ()=>{
+
+    addToWishListFunction({variables:{
+        userId :IDUSER,
+        productId :idProduct
+    }}).then(result=>{
+        alert("produit ajouté à la wishlist")
+    })
 }
 
 if(loading) console.log(loading);
@@ -178,7 +195,7 @@ if(Product.imgUrl.length>0){
 
                         <button onClick={AddToCartHandler} className={styles.AddCart}> Ajouter à cart</button>
                    
-                    <span> <MdFavorite className={styles.AddWish} />  </span>
+                    <span> <MdFavorite onClick={AddToWishList} className={styles.AddWish} />  </span>
                    </div>
                 </div>
 

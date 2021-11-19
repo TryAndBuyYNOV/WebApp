@@ -40,6 +40,7 @@ const Navbar = ({role}) => {
             <ul className={styles.list}>
                 <li> <Link href="/account/profile" > Mon profile </Link> </li>
                 <li> <Link href="/account/orders" > Mes commandes </Link> </li>
+                <li> <Link href="/account/wishlist" > WishList </Link> </li>
                 <li> <Link href="/account/catalog" > Catalogues </Link> </li>
                 <li> <Link href="/account/geolocalisation" > géolocalisation  </Link> </li>
                 <li>    <button onClick={()=>Deconnect()}> Déconnexion  </button> </li>
