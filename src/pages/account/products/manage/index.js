@@ -3,6 +3,7 @@ import {gql , useQuery} from '@apollo/client'
 import Navbar from 'components/Account/Navbar';
 import ProductList from '../../../../Components/Admin/ProductList';
 import withAuth from 'HOC/withAuth';
+import styles from '../../../../Scss/filter.module.scss'
 const ManageProduct = () => {
 
   
@@ -49,10 +50,12 @@ const ManageProduct = () => {
          </div>
             <div style={{ textAlign:'center',}}>
             <h1> Mes ventes </h1>
-            <button onClick ={()=>setFilter("all")}> tout les produit</button>
+           <div className={styles.Filter}>
+                 <button onClick ={()=>setFilter("all")}> tout les produit</button>
             <button onClick ={()=>setFilter("ToSell")}> produits à vendre</button>
             <button onClick ={()=>setFilter("SellingInProgress")}> produits en cours de vente</button>
-            <button onClick ={()=>setFilter("Selled")}> produits vendus</button>                     
+            <button onClick ={()=>setFilter("Selled")}> produits vendus</button>   
+            </div>                     
             {UIResult} 
             </div>
             

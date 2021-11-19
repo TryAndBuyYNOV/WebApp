@@ -3,6 +3,7 @@ import Navbar from "../../../components/Account/Navbar"
 import ProductList from '../../../components/admin/ProductList'
 import { gql , useQuery} from '@apollo/client'
 import withAuth from '../../../HOC/withAuth'
+import styles from '../../../Scss/filter.module.scss'
 const index = () => {
     
     const [filterCategory , setFilter] = useState("all")
@@ -32,7 +33,7 @@ if(data){
             <div>
                 <Navbar role = "Buyer" />
             </div>
-            <div>
+            <div className={styles.Filter}>
             <button onClick={()=> setFilter("all")}>tout les produits</button>
             <button onClick={()=> setFilter("Shoes")}>Chaussure</button>
             <button onClick={()=> setFilter("TShirt")}>T-Shirt</button>

@@ -4,6 +4,7 @@ import Navbar from 'components/Account/Navbar';
 import Table from 'components/Table/table';
 import {client} from '../../../pages/_app'
 import withAuth from 'HOC/withAuth';
+import styles from '../../../Scss/filter.module.scss'
 const Offers = () => {
 
     const [CartStat , setCart] = useState(null)
@@ -100,11 +101,13 @@ if(data && CartStat==null){
         <Navbar role={role} />
 
          <div>
-             <div style={{margin :'0 auto' , width:"500px"}}>
+             <div className={styles.Filter} >
                  <button> tout les offres</button>
                  <button>offres en attente</button>
                  <button> offres acceptés</button>
                  <button> offres réfusés</button>
+                 <button> offres payés</button>
+                 <button> offres annulés</button>
              </div>
             <Table cart={CartStat} DecisionFunction={DecisionFunctionMutation} />     
         </div>   
