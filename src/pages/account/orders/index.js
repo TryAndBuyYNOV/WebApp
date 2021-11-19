@@ -4,6 +4,7 @@ import Table from '../../../components/Table/table'
 import {gql , useQuery , useMutation} from '@apollo/client'
 import {client} from '../../../pages/_app'
 import withAuth from '../../../HOC/withAuth'
+import styles from '../../../Scss/Filter.module.scss'
 
 const Orders = () => {
 
@@ -89,6 +90,20 @@ if(data && CartStat==null){
     GetAllCartData(cartData)
 }
 
+const filterFunction = (filter)=>{
+    if(filter=="all"){
+        setCart()
+    }
+    const newArray = []
+    CartStat.forEach(element => {
+        if(element.cartStatus==filter){
+            newArray.push(element)
+        }
+    });
+
+    setCart(newArray)
+}
+
 
     return (
      
@@ -96,12 +111,14 @@ if(data && CartStat==null){
             
         <Navbar role={role} />
 
-         <div>
-             <div style={{margin :'0 auto' , width:"500px"}}>
-                 <button> tout les orders</button>
+         <div >
+             <div className={styles.Filter}>
+                 <button onClick={()=>filterFunction("all")}> tout les orders</button>
                  <button>orders en attente</button>
                  <button> orders acceptés</button>
                  <button> orders réfusés</button>
+                 <button> offres payés</button>
+                 <button onClick={()=>filterFunction("Canceled")}> offres annulés</button>
              </div>
             <Table cart={CartStat} isBuyer={true} DecisionFunction={DecisionFunctionMutation} />     
         </div>   
