@@ -5,51 +5,27 @@ import Rating from 'components/rating';
 import ButtonGroup from 'components/button-group';
 import Carousel from 'react-multi-carousel';
 
-import Avatar1 from 'assets/testimonial/avatar1.png';
-import Avatar2 from 'assets/testimonial/avatar2.png';
-import Avatar3 from 'assets/testimonial/avatar3.png';
-import Avatar4 from 'assets/testimonial/avatar4.png';
+import Avatar1 from 'assets/testimonial/pexels-ayodeji-fatunla-8451911.jpg';
+import Avatar2 from 'assets/testimonial/pexels-mahmoud-abdelwahab-7083673.jpg';
+import Avatar3 from 'assets/testimonial/pexels-pegah-5970787.jpg';
+import Avatar4 from 'assets/testimonial/pexels-sinitta-leunen-6577906.jpg';
 
 const data = [
   {
     id: 1,
-    title: 'Modern look & trending design',
-    description:
-      'Get working experience to work with this amazing team & in future want to work together for bright future projects and also make deposit to freelancer.',
     avatar: Avatar1,
-    name: 'Denny Hilguston',
-    designation: '@denny.hil',
-    review: 4,
   },
   {
     id: 2,
-    title: 'Design Quality & performance',
-    description:
-      'Get working experience to work with this amazing team & in future want to work together for bright future projects and also make deposit to freelancer.',
     avatar: Avatar2,
-    name: 'Denny Hilguston',
-    designation: '@denny.hil',
-    review: 5,
   },
   {
     id: 3,
-    title: 'Layout and organized layers',
-    description:
-      'Get working experience to work with this amazing team & in future want to work together for bright future projects and also make deposit to freelancer.',
     avatar: Avatar3,
-    name: 'Denny Hilguston',
-    designation: '@denny.hil',
-    review: 5,
   },
   {
     id: 4,
-    title: 'Modern look & trending design',
-    description:
-      'Get working experience to work with this amazing team & in future want to work together for bright future projects and also make deposit to freelancer.',
     avatar: Avatar4,
-    name: 'Denny Hilguston',
-    designation: '@denny.hil',
-    review: 4,
   },
 ];
 
@@ -101,7 +77,23 @@ const carouselParams = {
 
 export default function TestimonialCard() {
   return (
-   <h1>Testimonial Card</h1>
+    <Container css={{ textAlign: 'center'}}>
+      <SectionHeader
+        title="Products made"
+        slogan="Right for you"
+      />
+      <Box sx={styles.carouselWrapper}>
+        <Carousel {...carouselParams}>
+          {data.map((item) =>(
+            <Box sx={styles.reviewCard} key={item.sliderClass}>
+              <div className="image">
+                <Image src={item.avatar}/>
+              </div>
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+    </Container>
   );
 }
 
@@ -125,7 +117,7 @@ const styles = {
         null,
         'calc(50% + 865px)',
       ],
-      mr: ['auto', null, null, null, null, null, null, '-220px'],
+      mr: ['auto', null, null, null, null, null, null, null],
       ml: 'auto',
       '.react-multi-carousel-item': {
         transition: 'all 0.25s',
@@ -143,12 +135,7 @@ const styles = {
     transition: 'all 0.3s',
     borderRadius: '6px',
     p: [
-      '30px 20px 35px',
-      '30px 25px 35px',
-      '30px 20px 35px',
-      '35px 30px 40px 40px',
-      '30px 30px 35px',
-      '35px 30px 40px 40px',
+
     ],
     bg: 'white',
     textAlign: 'left',

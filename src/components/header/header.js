@@ -1,15 +1,47 @@
 /** @jsx jsx */
-import { jsx, Container, Flex, Button } from 'theme-ui';
+import { jsx, Container, Flex, Button, Text } from 'theme-ui';
 import { keyframes } from '@emotion/core';
 import { Link } from 'react-scroll';
 import Logo from 'components/logo';
 import LogoDark from 'assets/logo.svg';
 import MobileDrawer from './mobile-drawer';
 import menuItems from './header.data';
-
+import {useRouter} from 'next/router'
 export default function Header({ className }) {
+
+
+  const router = useRouter()
   return (
-      <h1>Header</h1>
+      <header sx={styles.header} className={className} id="header">
+        <Container sx={styles.container}>
+          <Link path="/">
+          <h1> Try & buy</h1>
+          </Link>
+
+          <Flex as="nav" sx={styles.nav}>
+            {menuItems.map((menuItem, i)=>(
+              <Link
+                activeClass="active"
+                to={menuItem.path}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                key={i}
+              >
+                {menuItem.label}
+              </Link>
+             ))}
+          </Flex>
+          <Button onClick={()=>{router.push('/login')}} className="donate__btn" variant="primary" aria-label="Sign In">
+            Sign In
+          </Button>
+          <Button onClick={()=>{router.push('/signup')}} className="donate__btn" variant="secondary" aria-label="Sign Up">
+            Sign Up
+          </Button>
+          <MobileDrawer/>
+        </Container>
+      </header>
   );
 }
 
@@ -28,19 +60,20 @@ const positionAnim = keyframes`
 
 const styles = {
   header: {
-    color: 'text',
+    fontSize: 5,
+    color: '#fff',
     fontWeight: 'body',
-    py: 4,
+    py: 0,
     width: '100%',
     position: 'absolute',
     top: 0,
     left: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(50, 50, 50, 0.46)',
     transition: 'all 0.4s ease',
     animation: `${positionAnim} 0.4s ease`,
     '.donate__btn': {
       flexShrink: 0,
-      mr: [15, 20, null, null, 0],
+      mr: [5, 10, null, null, 0],
       ml: ['auto', null, null, null, 0],
     },
     '&.sticky': {
@@ -48,9 +81,9 @@ const styles = {
       backgroundColor: 'background',
       color: '#000000',
       boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
-      py: 3,
-      'nev > a': {
-        color: 'text',
+      py: 0,
+      'nav > a': {
+        color: '#000000',
       },
     },
   },
@@ -66,12 +99,13 @@ const styles = {
       display: 'block',
     },
     a: {
-      fontSize: 2,
+      fontSize: 3,
       fontWeight: 'body',
       px: 5,
       cursor: 'pointer',
-      lineHeight: '1.2',
+      lineHeight: '1.5',
       transition: 'all 0.15s',
+      color: '#FFFFFF',
       '&:hover': {
         color: 'primary',
       },

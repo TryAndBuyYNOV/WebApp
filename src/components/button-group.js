@@ -4,21 +4,33 @@ import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 
 export default function ButtonGroup({ next, previous }) {
   return (
-    <h1>ButtonGroup</h1>
+    <Flex sx={{witht: '100%'}}>
+      <Container>
+        <Box sx={styles.buttonGroup} className="button__group">
+          <button onclick={previous} aria-label="Previous">
+            <IoIosArrowRoundBack/>
+          </button>
+          <button onclick={next} aria-label="next">
+            <IoIosArrowRoundForward/>
+          </button>
+        </Box>
+      </Container>
+    </Flex>
   );
 }
 
 const styles = {
   buttonGroup: {
+    
     display: 'flex',
     justifyContent: 'center',
-    mb: -4,
+    mb: 4,
     button: {
       bg: 'transparent',
       border: '0px solid',
-      fontSize: 40,
+      fontSize: 50,
       cursor: 'pointer',
-      px: '2px',
+      px: '300px',
       color: '#BBC7D7',
       transition: 'all 0.25s',
       '&:hover': {

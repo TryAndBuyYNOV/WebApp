@@ -18,7 +18,12 @@ export default function IndexPage() {
   return (
     <ThemeProvider theme={theme}>
         <Layout>
-
+        <Banner/>
+        <TestimonialCard/>
+        <CoreFeature/>
+        <ServiceSection/>
+        <WorkFlow/>
+        <KeyFeature/>
         </Layout>
     </ThemeProvider>
   );

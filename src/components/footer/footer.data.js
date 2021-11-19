@@ -1,24 +1,23 @@
+import { FaFacebookF, FaTwitter, FaGithubAlt, FaDribbble } from 'react-icons/fa';
+
 export default {
-  menuItem: [
+  social: [
     {
       path: '/',
-      label: 'Home',
+      icon: <FaFacebookF />,
     },
     {
       path: '/',
-      label: 'Adversite',
+      icon: <FaTwitter />,
     },
     {
       path: '/',
-      label: 'Supports',
+      icon: <FaGithubAlt />,
     },
     {
       path: '/',
-      label: 'Marketing',
-    },
-    {
-      path: '/',
-      label: 'Contact',
+      icon: <FaDribbble />,
     },
   ],
 };
+

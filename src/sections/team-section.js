@@ -1,198 +1,218 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import { Container, Grid } from 'theme-ui';
+import { jsx, Container, Heading, Text, Box, Image } from 'theme-ui';
 import SectionHeader from 'components/section-header';
-import TeamCard from 'components/team-card';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import Rating from 'components/rating';
+import ButtonGroup from 'components/button-group';
+import Carousel from 'react-multi-carousel';
 
-import Member1 from 'assets/team/member-1.png';
-import Member2 from 'assets/team/member-2.png';
-import Member3 from 'assets/team/member-3.png';
-import Member4 from 'assets/team/member-4.png';
-import Member5 from 'assets/team/member-5.png';
-import Member6 from 'assets/team/member-6.png';
+import Avatar1 from 'assets/testimonial/pexels-ayodeji-fatunla-8451911.jpg';
+import Avatar2 from 'assets/testimonial/pexels-mahmoud-abdelwahab-7083673.jpg';
+import Avatar3 from 'assets/testimonial/pexels-pegah-5970787.jpg';
+import Avatar4 from 'assets/testimonial/pexels-sinitta-leunen-6577906.jpg';
 
 const data = [
   {
     id: 1,
-    imgSrc: Member1,
-    altText: 'Saimon Harmer',
-    title: 'Saimon Harmer',
-    designation: 'CEO and Founder',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
+    avatar: Avatar1,
   },
   {
     id: 2,
-    imgSrc: Member2,
-    altText: 'Aaron Nunez',
-    title: 'Aaron Nunez',
-    designation: 'Founder',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
+    avatar: Avatar2,
   },
   {
     id: 3,
-    imgSrc: Member3,
-    altText: 'Aaron Nunez',
-    title: 'Aaron Nunez',
-    designation: 'Web Designer',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
+    avatar: Avatar3,
   },
   {
     id: 4,
-    imgSrc: Member4,
-    altText: 'Lina Jutila',
-    title: 'Lina Jutila',
-    designation: 'Web Developer',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
-  },
-  {
-    id: 5,
-    imgSrc: Member5,
-    altText: 'Saimon Harmer',
-    title: 'Saimon Harmer',
-    designation: 'CEO and Founder',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
-  },
-  {
-    id: 6,
-    imgSrc: Member6,
-    altText: 'Aaron Nunez',
-    title: 'Aaron Nunez',
-    designation: 'Web Designer',
-    socialProfile: [
-      {
-        id: 1,
-        name: 'facebook',
-        path: '#',
-        icon: <FaFacebookF />,
-      },
-      {
-        id: 2,
-        name: 'twitter',
-        path: '#',
-        icon: <FaTwitter />,
-      },
-      {
-        id: 3,
-        name: 'instagram',
-        path: '#',
-        icon: <FaInstagram />,
-      },
-    ],
+    avatar: Avatar4,
   },
 ];
 
-export default function TeamSection() {
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1619 },
+    items: 4,
+    slidesToSlide: 4, // optional, default to 1.
+  },
+  laptop: {
+    breakpoint: { max: 1619, min: 1024 },
+    items: 3,
+    slidesToSlide: 3, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 640 },
+    items: 2,
+    slidesToSlide: 2, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 639, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
+
+const carouselParams = {
+  additionalTransfrom:0,
+  arrows:false,
+  autoPlaySpeed:3000,
+  centerMode:false,
+  className:"",
+  containerClass:"carousel-container",
+  customButtonGroup:<ButtonGroup />,
+  dotListClass:"",
+  draggable: true,
+  focusOnSelect:false,
+  infinite:true,
+  itemClass:"",
+  keyBoardControl: true,
+  minimumTouchDrag:80,
+  renderButtonGroupOutside: true,
+  renderDotsOutside:false,
+  responsive:responsive,
+  showDots:false,
+  sliderClass:"",
+  slidesToSlide:1,
+}
+
+export default function TestimonialCard() {
   return (
-    <h1>Team Section</h1>
+    <Container css={{ textAlign: 'center'}}>
+      <SectionHeader
+        title="Products made"
+        slogan="Right for you"
+      />
+      <Box sx={styles.carouselWrapper}>
+        <Carousel {...carouselParams}>
+          {data.map((item) =>(
+            <Box sx={styles.reviewCard} key={item.sliderClass}>
+              <div className="image">
+                <Image src={item.avatar}/>
+              </div>
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+    </Container>
   );
 }
 
 const styles = {
-  grid: {
-    mt: [0, null, -6, null, -4],
-    gridGap: ['35px 0px', null, 0, null, null, '30px 35px'],
-    gridTemplateColumns: [
-      'repeat(2,1fr)',
-      null,
-      'repeat(2,1fr)',
-      null,
-      'repeat(3,1fr)',
+  carouselWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    mt: '-30px',
+    px: '15px',
+    '.carousel-container': {
+      width: '100%',
+      maxWidth: [
+        '100%',
+        null,
+        null,
+        '750px',
+        '1000px',
+        '1180px',
+        null,
+        'calc(50% + 865px)',
+      ],
+      mr: ['auto', null, null, null, null, null, null, null],
+      ml: 'auto',
+      '.react-multi-carousel-item': {
+        transition: 'all 0.25s',
+      },
+      '.react-multi-carousel-item--active:nth-of-type(4n)': {
+        opacity: '0.5',
+        '@media screen and (max-width: 1620px)': {
+          opacity: 1,
+        },
+      },
+    },
+  },
+  reviewCard: {
+    boxShadow: '0px 0px 1px rgba(38, 78, 118, 0.35)',
+    transition: 'all 0.3s',
+    borderRadius: '6px',
+    p: [
+
     ],
+    bg: 'white',
+    textAlign: 'left',
+    m: [
+      '28px 5px 30px 5px',
+      '28px 20px 30px 20px',
+      '28px 15px 30px 15px',
+      '28px 15px 30px 15px',
+      '30px 20px 40px',
+    ],
+    '&:hover': {
+      boxShadow: '0px 6px 30px rgba(38, 78, 118, 0.1)',
+    },
+    '.rating': {
+      mb: [1, null, null, 2],
+      ul: {
+        pl: 0,
+        listStyle: 'none',
+        mb: 0,
+        display: 'flex',
+      },
+      svg: {
+        marginRight: '2px',
+        '&:last-of-type': {
+          marginRight: 0,
+        },
+      },
+      '.star': {
+        color: 'primary',
+        mr: '1px',
+      },
+      '.star-o': {
+        color: '#ddd',
+        mr: '1px',
+      },
+    },
+    '.card-footer': {
+      display: 'flex',
+      alignItems: 'center',
+      marginTop: [5, null, null, '33px'],
+      '.image': {
+        flexShrink: 0,
+        mr: [3, null, null, 4],
+        display: 'flex',
+        img: {
+          width: '55px',
+          height: '55px',
+          borderRadius: '50%',
+          objectFit: 'cover',
+        },
+      },
+    },
+  },
+  title: {
+    fontSize: [1, 2],
+    fontWeight: 700,
+    mb: [3, null, null, '22px'],
+    color: 'text',
+    lineHeight: 1.6,
+  },
+  description: {
+    fontSize: [1, null, null, 2],
+    fontWeight: 'normal',
+    color: 'text',
+    lineHeight: [1.85, null, 2],
+  },
+  heading: {
+    fontSize: [1, null, null, 2],
+    fontWeight: 700,
+    mb: '3px',
+    color: 'text',
+    lineHeight: 1.3,
+  },
+  designation: {
+    color: 'primary',
+    fontWeight: '500',
+    fontSize: 1,
+    lineHeight: 1.4,
   },
 };

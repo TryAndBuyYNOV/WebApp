@@ -1,17 +1,37 @@
 /** @jsx jsx */
-import { jsx, Container, Box, Image } from 'theme-ui';
+import { jsx, Container, Box, Grid, Text, Heading, Button, Image } from 'theme-ui';
 import TextFeature from 'components/text-feature';
 
-import FeatureThumb from 'assets/core-feature.png';
-import shapePattern from 'assets/shape-pattern2.png';
+import FeatureThumb from 'assets/core-feature.jpg';
+import { Link } from '@theme-ui/components';
 
 const data = {
-  subTitle: 'Core features',
-  title: 'Smart Jackpots that you may love this anytime & anywhere',
+  
+  title: 'For buyers',
+  features: [
+    {
+      id: 1,
+      title: '1.',
+      text:
+        'Choose something to buy in your area',
+    },
+    {
+      id: 2,
+      title: '2.',
+      text:
+        'Try it & keep it as long as you want',
+    },
+    {
+      id: 3,
+      title: '3.',
+      text:
+        'Buy it & enjoy for life …',
+    },
+  ],
   description:
-    'Get your tests delivered at let home collect sample from the victory of the managements that supplies best design system guidelines ever.',
-  btnName: 'Get Started',
-  btnURL: '#',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  btnName: 'REGISTER',
+  btnURL: 'MORE INFORMATION',
 };
 
 export default function CoreFeature() {
@@ -19,19 +39,33 @@ export default function CoreFeature() {
    <section sx={{variant: 'section.coreFeature'}}>
     <Container sx={styles.containerBox}>
       <Box sx={styles.contentBox}>
+      <TextFeature title={data.title}/>
+           <Grid sx={styles.grid}>
+             {data.features.map((feature)=>(
+              <Box sx={styles.card} key={feature.id}>
+                <Box sx={styles.wrapper}>
+                  <Heading sx={styles.title}>
+                    {feature.title}
+                  </Heading>
+                  <Text sx={styles.subTitle}>
+                    {feature.text}
+                  </Text>
+                </Box>
+              </Box>
+             ))}
+           </Grid>
         <TextFeature 
-          subTitle={data.subTitle}
-          title={data.title}
           description={data.description}
-          btnName={data.btnName}
-          btnURL={data.btnURL}
         />
+        <Button sx={styles.btnName}>
+          {data.btnName}
+        </Button>
+        <Link>
+          {data.btnURL}
+        </Link>
       </Box>
       <Box sx={styles.thumbnail}>
         <Image src={FeatureThumb} alt="Thumbnail" />
-        <Box sx={styles.shapeBox}>
-          <Image src={shapePattern} alt="Shape"/>
-        </Box>
       </Box>
     </Container>
    </section>
@@ -54,8 +88,29 @@ const styles = {
     pb: ['50px', '60px', null, 0],
     mx: ['auto', null, null, 0],
     '.description': {
-      pr: [0, null, 6, 7, 6],
+      pr: [5, 5, 6, 7, 6],
     },
+  },
+  grid: {
+    mb: -1,
+    pt: 0,
+    gridGap: [
+      '35px 0',
+      null,
+      '45px 30px',
+      null,
+      '50px 25px',
+      null,
+      null,
+      '50px 65px',
+    ],
+    gridTemplateColumns: [
+      'repeat(1,1fr)',
+      null,
+      'repeat(2,1fr)',
+      null,
+      'repeat(4,1fr)',
+    ],
   },
   thumbnail: {
     display: 'inline-flex',
@@ -75,4 +130,7 @@ const styles = {
     zIndex: -1,
     display: ['none', 'inline-block', 'none', null, 'inline-block'],
   },
+  btnName:{
+    ml: ['auto', 1, 1, 1, 1],
+  }
 };
