@@ -21,7 +21,7 @@ const index = () => {
     }
 
     return (
-        <div style={{display:"flex", justifyContent:"space-between"}}>
+        <div style={{display:"flex"}}>
             <div>
             <Navbar role={role} />
             </div>

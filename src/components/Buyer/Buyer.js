@@ -2,8 +2,8 @@ import React from 'react';
 
 const Buyer = () => {
     return (
-        <div>
-            this is buyer component
+        <div style={{textAlign:"center" , fontSize:"5rem"}}>
+            Bienvenue sur Try and Buy
         </div>
     );
 };
