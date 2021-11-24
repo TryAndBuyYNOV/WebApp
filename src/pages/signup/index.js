@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import styles from "./SignUp.module.scss";
+/** @jsx jsx */
+import { jsx, Container, Box, Button, Text } from "theme-ui";
+import { useRef, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import AutoComplete from "react-google-autocomplete";
 import { useRouter } from "next/router";
@@ -7,8 +8,9 @@ import ProfilPicture from "components/Profile/picture";
 import image from "../../assets/team/member-5.png";
 import axios from "axios";
 import { schema } from "utils/schemas/signup";
+import { Input, Label, Select } from "@theme-ui/components";
 
-const index = () => {
+export default function index() {
   // Hooks
   const [Forms, setForms] = useState({
     firstName: "",
@@ -130,7 +132,7 @@ const index = () => {
     });
   };
 
-  const AutoCompletComponent = ({ state }) => {
+  const AutoCompletComponent = ({ state, style }) => {
     const [inputValue, setInputValue] = useState(state.address.localisation);
 
     const onChangeInputHandler = (event) => {
@@ -140,7 +142,7 @@ const index = () => {
 
     return (
       <AutoComplete
-        className={styles.signupForms}
+        style={style}
         value={inputValue}
         onChange={onChangeInputHandler}
         apiKey={"AIzaSyAXcZLzg7Ut2hABj8Yo2ekpYuowcwKeBas"}
@@ -162,86 +164,116 @@ const index = () => {
     );
   };
   return (
-    <div className={styles.container}>
-      <h1> Sign Up</h1>
-      <p
-        style={{ display: isError ? "block" : "none" }}
-        className={styles.ErrorMessage}
-      >
-        {" "}
-        email existe dèja
-      </p>
-      {errorMessage && <p className={styles.ErrorMessage}>{errorMessage}</p>}
-      <form onSubmit={SubmitForms}>
-        <ProfilPicture
-          profilePic={picturData}
-          changeHandler={changePicturHandler}
-        />
-        <input
-          type="text"
-          className={styles.signupForms}
-          placeholder="Nom..."
-          name="firstName"
-          value={Forms.firstName}
-          onChange={FormsOnChange}
-        />
-        <input
-          type="text"
-          className={styles.signupForms}
-          placeholder="Prénom..."
-          name="lastName"
-          value={Forms.lastName}
-          onChange={FormsOnChange}
-        />
-        <input
-          type="text"
-          className={styles.signupForms}
-          placeholder="Numéro de télephone..."
-          name="numero"
-          value={Forms.numero}
-          onChange={FormsOnChange}
-        />
-        <input
-          type="email"
-          className={styles.signupForms}
-          placeholder="Email..."
-          name="email"
-          value={Forms.email}
-          onChange={FormsOnChange}
-        />
-        <input
-          type="password"
-          className={styles.signupForms}
-          placeholder="mot de passe..."
-          name="password"
-          value={Forms.password}
-          onChange={FormsOnChange}
-        />
-
-        <AutoCompletComponent state={Forms} />
-
-        <select
-          onChange={FormsOnChange}
-          className={styles.signupForms}
-          name=""
-          id=""
-          name="role"
+    <Container>
+      <Box>
+        <h1> Sign Up</h1>
+        <Text
+          style={{ display: isError ? "block" : "none" }}
+          sx={styles.errorMessage}
         >
-          <option selected value="Seller">
-            Vendeur
-          </option>
-          <option value="Buyer">Acheteur</option>
-        </select>
+          {" "}
+          email existe dèja
+        </Text>
+        {errorMessage && <Text className={styles.errorMessage}>{errorMessage}</Text>}
+        <Box as="form" onSubmit={SubmitForms}>
+          <ProfilPicture
+            profilePic={picturData}
+            changeHandler={changePicturHandler}
+          />
+          <Label>Prénom</Label>
+          <Input
+            type="text"
+            name="firstName"
+            value={Forms.firstName}
+            onChange={FormsOnChange}
+          />
+          <Label>Nom</Label>
 
-        <button
-          className={styles.signupForms + " " + styles.SubmitButton}
-          type="submit"
-        >
-          Sign Up
-        </button>
-      </form>
-    </div>
+          <Input
+            type="text"
+            name="lastName"
+            value={Forms.lastName}
+            onChange={FormsOnChange}
+          />
+          <Label>Téléphone</Label>
+
+          <Input
+            type="text"
+            name="numero"
+            value={Forms.numero}
+            onChange={FormsOnChange}
+          />
+          <Label>Email</Label>
+
+          <Input
+            type="email"
+            name="email"
+            value={Forms.email}
+            onChange={FormsOnChange}
+          />
+          <Label>Mot de passe</Label>
+          <Input
+            type="password"
+            name="password"
+            value={Forms.password}
+            onChange={FormsOnChange}
+          />
+          <Label>Adresse</Label>
+          <AutoCompletComponent state={Forms} style={styles.autocomplete} />
+          <Label>Rôle</Label>
+          <Select
+            sx={styles.select}
+            onChange={FormsOnChange}
+            name=""
+            id=""
+            name="role"
+          >
+            <option selected value="Seller">
+              Vendeur
+            </option>
+            <option value="Buyer">Acheteur</option>
+          </Select>
+          <Box sx={styles.container}>
+            <Button
+              className={styles.signupForms + " " + styles.SubmitButton}
+              type="submit"
+            >
+              Sign Up
+            </Button>
+            <Button
+              onClick={() => {
+                router.push("/");
+              }}
+              className="donate__btn"
+              variant="secondary"
+              aria-label="Back"
+            >
+              Back
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
-};
+}
 
-export default index;
+const styles = {
+  container: {
+    display: "flex",
+    alignItems: "left",
+    justifyContent: "flex-start",
+  },
+  autocomplete: {
+    width: "100%",
+    borderRadius: "8px",
+    borderColor: "#E5ECF4",
+    padding: "2%",
+    marginBottom: "10px",
+  },
+  errorMessage: {
+    color: "#DC143C"
+  },
+  select: {
+    marginBottom: "10px",
+  },
+};

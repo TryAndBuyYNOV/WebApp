@@ -1,11 +1,13 @@
+/** @jsx jsx */
+import { jsx, Container, Box, Button, Input } from "theme-ui";
 import React, { useRef, useState } from "react";
-import styles from "./Login.module.scss";
 import { gql, useLazyQuery } from "@apollo/client";
 import jwt_decode from "jwt-decode";
 import { useRouter } from "next/router";
 import { schema } from "utils/schemas/login";
+import { Label, Text } from "@theme-ui/components";
 
-const index = () => {
+export default function index() {
   const router = useRouter();
   const [Forms, setForms] = useState({
     email: "",
@@ -52,7 +54,6 @@ const index = () => {
   };
 
   if (called === true && data) {
-    console.log("is loged");
     isUpdated.current = false;
     const token = data["login"].token;
 
@@ -67,50 +68,78 @@ const index = () => {
   }
 
   if (called === true && !data) {
-    console.log("not loged");
     isUpdated.current = true;
   }
 
   return (
-    <div className={styles.container}>
-      <h1> Login</h1>
+    <Container>
+      <Box sx={styles.container}>
+        <h1> Login</h1>
 
-      <p
-        style={{ display: isUpdated.current ? "block" : "none" }}
-        className={styles.ErrorMessage}
-      >
-        {" "}
-        email ou mot de passe erroné
-      </p>
-      {errorMessage && <p className={styles.ErrorMessage}>{errorMessage}</p>}
-      <form onSubmit={SubmitLogin}>
-        <input
-          className={styles.signupForms}
-          type="text"
-          name="email"
-          id=""
-          placeholder="email..."
-          value={Forms.email}
-          onChange={OnChangeLogin}
-        />
-        <input
-          className={styles.signupForms}
-          type="password"
-          placeholder="password..."
-          value={Forms.password}
-          name="password"
-          onChange={OnChangeLogin}
-        />
-
-        <button
-          className={styles.signupForms + " " + styles.SubmitButton}
-          type="submit"
+        <Text
+          style={{ display: isUpdated.current ? "block" : "none" }}
+          sx={styles.errorMessage}
         >
-          Login
-        </button>
-      </form>
-    </div>
+          {" "}
+          email ou mot de passe erroné
+        </Text>
+        {errorMessage && <Text sx={styles.errorMessage}>{errorMessage}</Text>}
+        <Box as="form" onSubmit={SubmitLogin}>
+          <Label>Email</Label>
+          <Input
+            type="text"
+            name="email"
+            id=""
+            value={Forms.email}
+            onChange={OnChangeLogin}
+          />
+          <Label>Mot de passe</Label>
+          <Input
+            sx={styles.bottomField}
+            type="password"
+            value={Forms.password}
+            name="password"
+            onChange={OnChangeLogin}
+          />
+          <Box sx={styles.buttonGroup}>
+            <Button
+              className={styles.signupForms + " " + styles.SubmitButton}
+              type="submit"
+            >
+              Login
+            </Button>
+            <Button
+              onClick={() => {
+                router.push("/");
+              }}
+              className="donate__btn"
+              variant="secondary"
+              aria-label="Back"
+            >
+              Back
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
-};
+}
 
-export default index;
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  buttonGroup: {
+    display: "flex",
+    alignItems: "flex-start",
+  },
+  bottomField: {
+    marginBottom: "10px",
+  },
+  errorMessage: {
+    color: "#DC143C",
+  },
+};

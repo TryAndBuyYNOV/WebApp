@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui';
-import React, { useState } from 'react';
-import Sticky from 'react-stickynode';
-import Header from './header/header';
-import Footer from './footer/footer';
+import { jsx } from "theme-ui";
+import React, { useState } from "react";
+import Sticky from "react-stickynode";
+import Header from "./header/header";
+import Footer from "./footer/footer";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const [isSticky, setIsSticky] = useState(false);
@@ -15,13 +16,15 @@ export default function Layout({ children }) {
       setIsSticky(false);
     }
   };
-  
+  const router = useRouter();
   return (
     <React.Fragment>
-      <Sticky innerZ={1001} top={0} onStateChange={handleStateChange}>
-        <Header className={`${isSticky ? 'sticky' : 'unSticky'}`} />
-      </Sticky>
-      <main id="content" sx={{ variant: 'layout.main', }} >
+      {(router.pathname !== "/signup" && router.pathname !== "/login") && (
+        <Sticky innerZ={1001} top={0} onStateChange={handleStateChange}>
+          <Header className={`${isSticky ? "sticky" : "unSticky"}`} />
+        </Sticky>
+      )}
+      <main id="content" sx={{ variant: "layout.main" }}>
         {children}
       </main>
       <Footer />
