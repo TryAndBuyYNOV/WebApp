@@ -82,6 +82,7 @@ export default function index() {
           })
           .catch((error) => {
             console.log(error);
+            setErrorMessage("Please insert a picture");
           });
       })
       .catch((err) => {
@@ -107,7 +108,6 @@ export default function index() {
         if (result.data.createUser == null) {
           setError(true);
         } else {
-          alert("utilisateur crée avec succès");
           router.push("/login");
         }
       })
@@ -174,7 +174,7 @@ export default function index() {
           {" "}
           email existe dèja
         </Text>
-        {errorMessage && <Text className={styles.errorMessage}>{errorMessage}</Text>}
+        {errorMessage && <Text sx={styles.errorMessage}>{errorMessage}</Text>}
         <Box as="form" onSubmit={SubmitForms}>
           <ProfilPicture
             profilePic={picturData}
@@ -271,7 +271,7 @@ const styles = {
     marginBottom: "10px",
   },
   errorMessage: {
-    color: "#DC143C"
+    color: "#DC143C",
   },
   select: {
     marginBottom: "10px",
