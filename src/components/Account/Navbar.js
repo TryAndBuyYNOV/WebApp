@@ -38,13 +38,6 @@ const Navbar = ({ role }) => {
             {" "}
             <Link href="/account/offers"> Mes offres </Link>{" "}
           </li>
-          <li>
-            {" "}
-            <button onClick={() => Deconnect()} href="">
-              {" "}
-              Déconnexion{" "}
-            </button>{" "}
-          </li>
         </ul>
       </nav>
     );
@@ -78,10 +71,6 @@ const Navbar = ({ role }) => {
           <li>
             {" "}
             <Link href="/account/geolocalisation"> géolocalisation </Link>{" "}
-          </li>
-          <li>
-            {" "}
-            <button onClick={() => Deconnect()}> Déconnexion </button>{" "}
           </li>
         </ul>
       </nav>

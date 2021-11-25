@@ -1,10 +1,21 @@
+/** @jsx jsx */
+import {
+  jsx,
+  Container,
+  Box,
+  Button,
+  Text,
+  Label,
+  Select,
+  Input,
+} from "theme-ui";
 import React, { useRef, useState } from "react";
-import styles from "../../../components/admin/SearchBar.module.css";
 import Navbar from "../../../components/Account/Navbar";
 import { gql, useMutation } from "@apollo/client";
 import axios from "axios";
 import withAuth from "HOC/withAuth";
 import { schema } from "../../../utils/schemas/product";
+import { Textarea } from "@theme-ui/components";
 
 const AddProduct = () => {
   // React Hooks
@@ -16,7 +27,7 @@ const AddProduct = () => {
   });
 
   const [pictursStat, setPicturStat] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const InputPicturRef = useRef();
 
   const ID = JSON.parse(localStorage.getItem("user")).id;
@@ -45,31 +56,35 @@ const AddProduct = () => {
   const onSubmitProduct = async (event) => {
     event.preventDefault();
     let picturNamesArray = [];
-    
-    await schema.validate(Forms)
-    .then((form) => {
+
+    await schema
+      .validate(Forms)
+      .then((form) => {
         pictursStat.map((pictur) => {
-            const data = new FormData();
-            data.append("file", pictur);
-            data.append("upload_preset", "tryandbuy");
-            return axios
-              .post("https://api.cloudinary.com/v1_1/dr5vzrsj1/image/upload", data)
-              .then((result) => {
-                const picturName = result["data"].public_id.split("/")[1];
-                picturNamesArray.push(picturName);
-                if (picturNamesArray.length == pictursStat.length) {
-                  addProduct(picturNamesArray);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          });
-    })
-    .catch((err) => {
+          const data = new FormData();
+          data.append("file", pictur);
+          data.append("upload_preset", "tryandbuy");
+          return axios
+            .post(
+              "https://api.cloudinary.com/v1_1/dr5vzrsj1/image/upload",
+              data
+            )
+            .then((result) => {
+              const picturName = result["data"].public_id.split("/")[1];
+              picturNamesArray.push(picturName);
+              if (picturNamesArray.length == pictursStat.length) {
+                addProduct(picturNamesArray);
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      })
+      .catch((err) => {
         console.log(err.name);
         setErrorMessage(err.errors);
-    })
+      });
   };
 
   const choosePicturHandler = (event) => {
@@ -122,75 +137,49 @@ const AddProduct = () => {
   // logic functions
 
   return (
-    <div
-      style={{
-        display: "flex",
-      }}
-    >
-      <div>
+    <Container sx={styles.container}>
+      <Box>
         <Navbar role={ROLE} />
-      </div>
-      <div style={{ textAlign: "center", margin: "0 auto" }}>
-        <h1> AJOUTER PRODUIT </h1>
-        {errorMessage &&(
-            <p className={styles.ErrorMessage}>{errorMessage}</p>
-        )}
-        <form onSubmit={onSubmitProduct}>
-          <label htmlFor="title" className={styles.Label}>
-            Titre:
-          </label>
-          <input
+      </Box>
+      <Box sx={styles.content}>
+        <Text sx={styles.title}> AJOUTER PRODUIT </Text>
+        {errorMessage && <Text sx={styles.errorMessage}>{errorMessage}</Text>}
+        <Box as="form" onSubmit={onSubmitProduct}>
+          <Label htmlFor="title">Titre:</Label>
+          <Input
             type="text"
-            style={{
-              marginLeft: "4rem",
-            }}
-            className={styles.SearchAdmin}
+            sx={styles.fieldForm}
             name="title"
             id="title"
             value={Forms.title}
             onChange={changeHandler}
           />
 
-          <label htmlFor="price" className={styles.Label}>
-            Prix:
-          </label>
-          <input
+          <Label htmlFor="price">Prix:</Label>
+          <Input
             type="number"
             step="0.01"
-            style={{
-              marginLeft: "4rem",
-            }}
-            className={styles.SearchAdmin}
+            sx={styles.fieldForm}
             name="price"
             id="price"
             value={Forms.price}
             onChange={changeHandler}
           />
 
-          <label htmlFor="description" className={styles.Label}>
-            Description:
-          </label>
-          <textarea
+          <Label htmlFor="description">Description:</Label>
+          <Textarea
             rows="7"
-            style={{
-              marginLeft: "4rem",
-            }}
-            className={styles.SearchAdmin}
+            sx={styles.fieldForm}
             name="description"
             id="description"
             value={Forms.description}
             onChange={changeHandler}
           />
 
-          <label htmlFor="category" className={styles.Label}>
-            catégorie:
-          </label>
-          <select
+          <Label htmlFor="category">Catégorie:</Label>
+          <Select
             onChange={changeHandler}
-            style={{
-              marginLeft: "4rem",
-            }}
-            className={styles.SearchAdmin}
+            sx={styles.fieldForm}
             name="category"
             id="category"
           >
@@ -240,7 +229,7 @@ const AddProduct = () => {
               {" "}
               Accessoire
             </option>
-          </select>
+          </Select>
 
           <input
             ref={InputPicturRef}
@@ -251,38 +240,53 @@ const AddProduct = () => {
             id=""
             onChange={choosePicturHandler}
           />
-          <div
-            name="modifier"
-            style={{
-              marginLeft: "4rem",
-              background: "purple",
-              cursor: "pointer",
-              color: "wheat",
-            }}
-            className={styles.SearchAdmin}
-            onClick={() => InputPicturRef.current.click()}
-          >
-            {" "}
-            Ajouter des images{" "}
-          </div>
+          <Box sx={{ marginTop: "15px" }}>
+            <Button
+              name="modifier"
+              className="donate__btn"
+              variant="primary"
+              aria-label="add pictures"
+              onClick={() => InputPicturRef.current.click()}
+            >
+              Ajouter des images
+            </Button>
 
-          <button
-            name="modifier"
-            style={{
-              marginLeft: "4rem",
-              background: "#969892",
-              cursor: "pointer",
-            }}
-            className={styles.SearchAdmin}
-            type="submit"
-          >
-            {" "}
-            Ajouter{" "}
-          </button>
-        </form>
-      </div>
-    </div>
+            <Button
+              name="modifier"
+              className="donate__btn"
+              variant="secondary"
+              aria-label="add product"
+              type="submit"
+            >
+              Ajouter
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
 };
-
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "flex-start",
+    gap: "7%",
+  },
+  content: {
+    marginTop: "150px",
+    width: "80%",
+  },
+  title: {
+    textDecoration: "underline",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 7,
+  },
+  fieldForm: {
+    width: "100%",
+  },
+  errorMessage: {
+    color: "#DC143C",
+  },
+};
 export default withAuth(AddProduct);
